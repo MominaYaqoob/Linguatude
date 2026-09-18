@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/app_colors.dart';
-import '../../widgets/onboarding/onboarding_continue_button.dart';
 
 class _BandScore {
   const _BandScore({
@@ -110,10 +109,7 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
               const SizedBox(height: 12),
               _buildDisclaimerCard(),
               const SizedBox(height: 40),
-              OnboardingContinueButton(
-                label: 'See My Study Plan',
-                onPressed: () => _continue(context),
-              ),
+              _buildStudyPlanButton(context),
             ],
           ),
         ),
@@ -168,6 +164,13 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
         color: AppColors.diagBannerBg,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.diagBannerBorder),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x40000000),
+            offset: Offset(0, 4),
+            blurRadius: 2,
+          ),
+        ],
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -207,6 +210,11 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
             color: Color(0x0D000000),
             offset: Offset(0, 1),
             blurRadius: 1,
+          ),
+          BoxShadow(
+            color: Color(0x40000000),
+            offset: Offset(0, 4),
+            blurRadius: 2,
           ),
         ],
       ),
@@ -378,6 +386,52 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
       body:
           "Speaking is your lowest area right now — let's work on "
           'confidence and fluency.',
+    );
+  }
+
+  Widget _buildStudyPlanButton(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 52,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x403B82F6),
+            offset: Offset(0, 10),
+            blurRadius: 7.5,
+            spreadRadius: -3,
+          ),
+          BoxShadow(
+            color: Color(0x403B82F6),
+            offset: Offset(0, 4),
+            blurRadius: 3,
+            spreadRadius: -4,
+          ),
+        ],
+      ),
+      child: ElevatedButton(
+        onPressed: () => _continue(context),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.diagPrimary,
+          foregroundColor: AppColors.white,
+          elevation: 0,
+          shadowColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          padding: EdgeInsets.zero,
+        ),
+        child: Text(
+          'See My Study Plan',
+          style: GoogleFonts.inter(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            height: 24 / 16,
+            color: AppColors.white,
+          ),
+        ),
+      ),
     );
   }
 
