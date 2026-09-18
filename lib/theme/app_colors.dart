@@ -1,0 +1,56 @@
+import 'package:flutter/material.dart';
+
+abstract final class AppColors {
+  static const primary = Color(0xFF2D5BFF);
+  static const primaryButton = Color(0xFF2B5CE6);
+  static const heading = Color(0xFF111827);
+  static const headingAlt = Color(0xFF20212B);
+  static const label = Color(0xFF191C1D);
+  static const muted = Color(0xFF6B7280);
+  static const placeholder = Color(0xFF70727D);
+  static const helper = Color(0xFF8A8B96);
+  static const terms = Color(0xFF464555);
+  static const inputBorder = Color(0xFFC7C4D8);
+  static const outline = Color(0xFFE7E8EB);
+  static const pill = Color(0xFFF3F4F5);
+  static const pillBorder = Color(0x4DC7C4D8);
+  static const buttonGlow = Color(0x40635BFF);
+  static const white = Color(0xFFFFFFFF);
+  static const black = Color(0xFF000000);
+  static const focusShadow = Color(0x402B5CE6);
+  static const focusInset = Color(0x332B5CE6);
+
+  // Onboarding
+  static const slate = Color(0xFF0F172A);
+  static const slateMuted = Color(0xFF64748B);
+  static const slateSoft = Color(0xFF475569);
+  static const slateBody = Color(0xFF334155);
+  static const progressInactive = Color(0xFF9DB6FD);
+  static const iconChip = Color(0xFFEEF2FF);
+  static const iconChipSoft = Color(0xFFDFEDFF);
+  static const cardBorder = Color(0xFFE2E8F0);
+  static const radioBorder = Color(0xFFCBD5E1);
+  static const continueGlow = Color(0xFFC7D2FE);
+  static const gray50 = Color(0xFFF8FAFC);
+  static const gray100 = Color(0xFFF1F5F9);
+  static const gray200 = Color(0xFFE5E7EB);
+  static const gray700 = Color(0xFF374151);
+  static const gray800 = Color(0xFF1F2937);
+  static const toggleOff = Color(0xFFCBD5E1);
+  static const errorBg = Color(0xFFFEF2F2);
+  static const errorBorder = Color(0xFFFEE2E2);
+  static const errorText = Color(0xFFDC2626);
+  static const warningBg = Color(0xCCFFFBEB);
+  static const warningBorder = Color(0x99FDE68A);
+  static const warningText = Color(0xFF78350F);
+  static const overallBg = Color(0x80EEF2FF);
+  static const overallBorder = Color(0x99E0E7FF);
+  static const infoCardBg = Color(0x99EEF2FF);
+  static const infoCardBorder = Color(0x99A1B7CE);
+  static const targetBorder = Color(0xFFA1B7CE);
+  static const dateHint = Color(0xFF94A3B8);
+  static const dateSubtext = Color(0xFF8A8C8D);
+  static const statsCard = Color(0xFFF7F8FF);
+  static const listDivider = Color(0xFFCBD4DD);
+  static const secondaryBtnBorder = Color(0xFFC7D2FE);
+}
