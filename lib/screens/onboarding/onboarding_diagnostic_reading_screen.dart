@@ -325,8 +325,8 @@ class _OnboardingDiagnosticReadingScreenState
                       flipY: !_passageExpanded,
                       child: SvgPicture.asset(
                         'assets/icons/onboarding/diag_chevron_up.svg',
-                        width: 16,
-                        height: 16,
+                        width: 10,
+                        height: 6.13,
                         fit: BoxFit.contain,
                       ),
                     ),
