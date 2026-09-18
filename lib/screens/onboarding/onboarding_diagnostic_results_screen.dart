@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/app_colors.dart';
+import 'onboarding_diagnostic_study_plan_screen.dart';
 
 class _BandScore {
   const _BandScore({
@@ -70,7 +71,11 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
   ];
 
   void _continue(BuildContext context) {
-    // Study plan screen is not built yet — nothing further to navigate to.
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => const OnboardingDiagnosticStudyPlanScreen(),
+      ),
+    );
   }
 
   @override

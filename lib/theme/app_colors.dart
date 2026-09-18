@@ -98,4 +98,28 @@ abstract final class AppColors {
   static const resultsFocusText = Color(0xFF92400E);
   static const resultsNoticeBorder = Color(0x997CB3FB);
   static const resultsNoticeIconBg = Color(0xB3DBEAFE);
+
+  // Study Plan (ONBD-008)
+  static const planCardGradientStart = Color(0xCCEFF6FF);
+  static const planCardGradientEnd = Color(0x4DEEF2FF);
+  static const planCardBorder = Color(0xCCDBEAFE);
+  static const planBadgeBg = Color(0xFF2563EB);
+  static const planStatCardBg = Color(0x99FFFFFF);
+  static const planStatCardBorder = Color(0x807EA2D2);
+  static const planStatIconBg = Color(0xFFCCE2FF);
+  static const planStatIcon = Color(0xFF2B5CE6);
+  static const planStatLabel = Color(0xFF94A3B8);
+  static const planDivider = Color(0xFFF1F5F9);
+  static const planPillBg = Color(0xFFF8FAFC);
+  static const planPillBorder = Color(0xFFE2E8F0);
+  static const planPillSelectedBg = Color(0xFF2563EB);
+  static const planLessonBlueBg = Color(0xFFEFF6FF);
+  static const planLessonBlueBorder = Color(0xFFDBEAFE);
+  static const planLessonOrangeBg = Color(0xFFFFF7ED);
+  static const planLessonOrangeBorder = Color(0xFFFFEDD5);
+  static const planLessonOrangeIcon = Color(0xFFEA580C);
+  static const planLessonGreenBg = Color(0xFFECFDF5);
+  static const planLessonGreenBorder = Color(0xFFD1FAE5);
+  static const planLessonGreenIcon = Color(0xFF059669);
+  static const planExploreLink = Color(0xFF64748B);
 }
