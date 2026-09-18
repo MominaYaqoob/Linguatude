@@ -77,4 +77,25 @@ abstract final class AppColors {
   static const diagChipBg = Color(0xFFEFF6FF);
   static const diagContinueShadow = Color(0x402563EB);
   static const diagBodyText = Color(0xFF1E293B);
+
+  // Diagnostic Results (ONBD-007)
+  static const resultsTrackBg = Color(0xFFE5E5E6);
+  static const resultsIconBgBlue = Color(0xFFE5EAFF);
+  static const resultsIconBgAmber = Color(0xFFFFF4C9);
+  static const resultsIconBgRose = Color(0xFFF6BEC8);
+  static const resultsProgressGreen = Color(0xFF10B981);
+  static const resultsScoreGreen = Color(0xFF059669);
+  static const resultsAmber = Color(0xFFF59E0B);
+  static const resultsRose = Color(0xFFF43F5E);
+  static const resultsIndigo = Color(0xFF4F46E5);
+  static const resultsStrengthBg = Color(0x99ECFDF5);
+  static const resultsStrengthBorder = Color(0xFF7DFEBC);
+  static const resultsStrengthIconBg = Color(0xFFD1FAE5);
+  static const resultsStrengthText = Color(0xFF065F46);
+  static const resultsFocusBg = Color(0x99FFFBEB);
+  static const resultsFocusBorder = Color(0xFFFFE786);
+  static const resultsFocusIconBg = Color(0xFFFEF3C7);
+  static const resultsFocusText = Color(0xFF92400E);
+  static const resultsNoticeBorder = Color(0x997CB3FB);
+  static const resultsNoticeIconBg = Color(0xB3DBEAFE);
 }
