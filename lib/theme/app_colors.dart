@@ -72,4 +72,9 @@ abstract final class AppColors {
   static const diagOptionBorder = Color(0xFFE2E8F0);
   static const diagOptionSelectedBg = Color(0x4DEFF6FF);
   static const diagOptionText = Color(0xFF475569);
+  static const diagCardBorderSoft = Color(0xCCE2E8F0);
+  static const diagOptionSelectedBgSoft = Color(0x66EFF6FF);
+  static const diagChipBg = Color(0xFFEFF6FF);
+  static const diagContinueShadow = Color(0x402563EB);
+  static const diagBodyText = Color(0xFF1E293B);
 }

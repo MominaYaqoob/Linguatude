@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/app_colors.dart';
+import 'onboarding_diagnostic_reading_screen.dart';
 
 class _DiagnosticQuestion {
   const _DiagnosticQuestion({required this.text, required this.options});
@@ -106,7 +107,11 @@ class _OnboardingDiagnosticActiveScreenState
 
   void _submit() {
     if (!_allAnswered) return;
-    // ONBD-007 (Diagnostic Results) is not built yet — nothing to navigate to.
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => const OnboardingDiagnosticReadingScreen(),
+      ),
+    );
   }
 
   @override
