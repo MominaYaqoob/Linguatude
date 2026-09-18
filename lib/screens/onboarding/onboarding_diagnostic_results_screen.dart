@@ -240,15 +240,19 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      item.label,
-                      style: GoogleFonts.inter(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        height: 20 / 16,
-                        color: AppColors.slate,
+                    Flexible(
+                      child: Text(
+                        item.label,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          height: 20 / 16,
+                          color: AppColors.slate,
+                        ),
                       ),
                     ),
+                    const SizedBox(width: 8),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [

@@ -158,50 +158,58 @@ class _OnboardingDiagnosticActiveScreenState
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: AppColors.diagPrimary,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                alignment: Alignment.center,
-                child: SvgPicture.asset(
-                  'assets/icons/onboarding/diag_headphones.svg',
-                  width: 20,
-                  height: 20,
-                  fit: BoxFit.contain,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Listening',
-                    style: GoogleFonts.inter(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      height: 20 / 14,
-                      letterSpacing: -0.35,
-                      color: AppColors.slate,
-                    ),
+          Expanded(
+            child: Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: AppColors.diagPrimary,
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  Text(
-                    'Section 1 of 4',
-                    style: GoogleFonts.inter(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      height: 16 / 12,
-                      color: AppColors.slateMuted,
-                    ),
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset(
+                    'assets/icons/onboarding/diag_headphones.svg',
+                    width: 20,
+                    height: 20,
+                    fit: BoxFit.contain,
                   ),
-                ],
-              ),
-            ],
+                ),
+                const SizedBox(width: 12),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Listening',
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          height: 20 / 14,
+                          letterSpacing: -0.35,
+                          color: AppColors.slate,
+                        ),
+                      ),
+                      Text(
+                        'Section 1 of 4',
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          height: 16 / 12,
+                          color: AppColors.slateMuted,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
+          const SizedBox(width: 12),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 7),
             decoration: BoxDecoration(

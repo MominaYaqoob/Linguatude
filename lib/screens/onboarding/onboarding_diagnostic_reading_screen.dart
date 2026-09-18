@@ -110,49 +110,57 @@ class _OnboardingDiagnosticReadingScreenState
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            Container(
-              width: 32,
-              height: 32,
-              decoration: BoxDecoration(
-                color: AppColors.diagPrimary,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              alignment: Alignment.center,
-              child: SvgPicture.asset(
-                'assets/icons/onboarding/diag_bolt.svg',
-                width: 20,
-                height: 20,
-                fit: BoxFit.contain,
-              ),
-            ),
-            const SizedBox(width: 8),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Reading',
-                  style: GoogleFonts.inter(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    height: 20 / 16,
-                    color: AppColors.slate,
-                  ),
+        Expanded(
+          child: Row(
+            children: [
+              Container(
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  color: AppColors.diagPrimary,
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                Text(
-                  'Section 2 of 4',
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    height: 16 / 12,
-                    color: AppColors.slateMuted,
-                  ),
+                alignment: Alignment.center,
+                child: SvgPicture.asset(
+                  'assets/icons/onboarding/diag_bolt.svg',
+                  width: 20,
+                  height: 20,
+                  fit: BoxFit.contain,
                 ),
-              ],
-            ),
-          ],
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Reading',
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.inter(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        height: 20 / 16,
+                        color: AppColors.slate,
+                      ),
+                    ),
+                    Text(
+                      'Section 2 of 4',
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        height: 16 / 12,
+                        color: AppColors.slateMuted,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
+        const SizedBox(width: 12),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 7),
           decoration: BoxDecoration(
@@ -518,9 +526,12 @@ class _OnboardingDiagnosticReadingScreenState
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _footerItem('All answers are saved automatically'),
+          Expanded(
+            child: _footerItem('All answers are saved automatically'),
+          ),
+          const SizedBox(width: 12),
           _footerItem('Secure & private'),
         ],
       ),
@@ -530,6 +541,7 @@ class _OnboardingDiagnosticReadingScreenState
   Widget _footerItem(String text) {
     return Row(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SvgPicture.asset(
           'assets/icons/onboarding/diag_shield_check.svg',
@@ -538,13 +550,15 @@ class _OnboardingDiagnosticReadingScreenState
           fit: BoxFit.contain,
         ),
         const SizedBox(width: 4),
-        Text(
-          text,
-          style: GoogleFonts.inter(
-            fontSize: 11,
-            fontWeight: FontWeight.w600,
-            height: 16.5 / 11,
-            color: AppColors.slateMuted,
+        Flexible(
+          child: Text(
+            text,
+            style: GoogleFonts.inter(
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              height: 16.5 / 11,
+              color: AppColors.slateMuted,
+            ),
           ),
         ),
       ],
