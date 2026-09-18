@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/app_colors.dart';
 import '../../widgets/onboarding/onboarding_header.dart';
+import 'onboarding_diagnostic_active_screen.dart';
 
 class OnboardingDiagnosticIntroScreen extends StatelessWidget {
   const OnboardingDiagnosticIntroScreen({super.key});
@@ -177,7 +178,14 @@ class OnboardingDiagnosticIntroScreen extends StatelessWidget {
                   ],
                 ),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            const OnboardingDiagnosticActiveScreen(),
+                      ),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryButton,
                     foregroundColor: AppColors.white,

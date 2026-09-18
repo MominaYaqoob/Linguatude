@@ -53,4 +53,23 @@ abstract final class AppColors {
   static const statsCard = Color(0xFFF7F8FF);
   static const listDivider = Color(0xFFCBD4DD);
   static const secondaryBtnBorder = Color(0xFFC7D2FE);
+
+  // Diagnostic Test — Active (ONBD-006)
+  static const diagPrimary = Color(0xFF2563EB);
+  static const diagPrimaryShadow = Color(0x4D3B82F6);
+  static const diagCardBorder = Color(0xFFE8EDF3);
+  static const diagBannerBg = Color(0xFFF7F8FF);
+  static const diagBannerBorder = Color(0xFFDBEAFE);
+  static const diagTimerPillBg = Color(0xFFF1F5F9);
+  static const diagTimerPillBorder = Color(0x99E2E8F0);
+  static const diagTimerAlert = Color(0xFFE11D48);
+  static const diagWaveformInactive = Color(0xFFB6BBC2);
+  static const diagStatusBg = Color(0x80EFF6FF);
+  static const diagStatusBorder = Color(0x99809CB3);
+  static const diagStatusText = Color(0xFF1D4ED8);
+  static const diagNoticeBg = Color(0xB3EFF6FF);
+  static const diagNoticeBorder = Color(0xCCDBEAFE);
+  static const diagOptionBorder = Color(0xFFE2E8F0);
+  static const diagOptionSelectedBg = Color(0x4DEFF6FF);
+  static const diagOptionText = Color(0xFF475569);
 }
