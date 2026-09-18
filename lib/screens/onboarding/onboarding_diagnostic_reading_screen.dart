@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/app_colors.dart';
@@ -114,10 +115,11 @@ class _OnboardingDiagnosticReadingScreenState
                 borderRadius: BorderRadius.circular(8),
               ),
               alignment: Alignment.center,
-              child: const Icon(
-                Icons.bolt_rounded,
-                size: 20,
-                color: AppColors.white,
+              child: SvgPicture.asset(
+                'assets/icons/onboarding/diag_bolt.svg',
+                width: 20,
+                height: 20,
+                fit: BoxFit.contain,
               ),
             ),
             const SizedBox(width: 8),
@@ -156,10 +158,11 @@ class _OnboardingDiagnosticReadingScreenState
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
-                Icons.access_time_rounded,
-                size: 14,
-                color: AppColors.slateBody,
+              SvgPicture.asset(
+                'assets/icons/onboarding/diag_clock.svg',
+                width: 14,
+                height: 14,
+                fit: BoxFit.contain,
               ),
               const SizedBox(width: 6),
               Text.rich(
@@ -225,10 +228,11 @@ class _OnboardingDiagnosticReadingScreenState
               ],
             ),
             alignment: Alignment.center,
-            child: const Icon(
-              Icons.menu_book_rounded,
-              size: 20,
-              color: AppColors.diagPrimary,
+            child: SvgPicture.asset(
+              'assets/icons/onboarding/diag_book.svg',
+              width: 20,
+              height: 20,
+              fit: BoxFit.contain,
             ),
           ),
           const SizedBox(width: 12),
@@ -304,12 +308,14 @@ class _OnboardingDiagnosticReadingScreenState
                       ),
                     ),
                     const SizedBox(width: 4),
-                    Icon(
-                      _passageExpanded
-                          ? Icons.keyboard_arrow_up_rounded
-                          : Icons.keyboard_arrow_down_rounded,
-                      size: 16,
-                      color: AppColors.diagPrimary,
+                    Transform.flip(
+                      flipY: !_passageExpanded,
+                      child: SvgPicture.asset(
+                        'assets/icons/onboarding/diag_chevron_up.svg',
+                        width: 16,
+                        height: 16,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ],
                 ),
@@ -346,10 +352,11 @@ class _OnboardingDiagnosticReadingScreenState
           ),
           child: Row(
             children: [
-              const Icon(
-                Icons.info_outline_rounded,
-                size: 16,
-                color: AppColors.diagStatusText,
+              SvgPicture.asset(
+                'assets/icons/onboarding/diag_info_circle.svg',
+                width: 16,
+                height: 16,
+                fit: BoxFit.contain,
               ),
               const SizedBox(width: 8),
               Text(
@@ -415,7 +422,12 @@ class _OnboardingDiagnosticReadingScreenState
               ),
               alignment: Alignment.center,
               child: selected
-                  ? const Icon(Icons.check, size: 12, color: AppColors.white)
+                  ? SvgPicture.asset(
+                      'assets/icons/onboarding/check_white.svg',
+                      width: 12,
+                      height: 12,
+                      fit: BoxFit.contain,
+                    )
                   : null,
             ),
             const SizedBox(width: 14),
@@ -484,10 +496,11 @@ class _OnboardingDiagnosticReadingScreenState
                 ),
               ),
               const SizedBox(width: 8),
-              const Icon(
-                Icons.arrow_forward_rounded,
-                size: 20,
-                color: AppColors.white,
+              SvgPicture.asset(
+                'assets/icons/onboarding/diag_arrow_forward.svg',
+                width: 20,
+                height: 20,
+                fit: BoxFit.contain,
               ),
             ],
           ),
@@ -513,10 +526,11 @@ class _OnboardingDiagnosticReadingScreenState
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const Icon(
-          Icons.verified_user_outlined,
-          size: 14,
-          color: AppColors.slateMuted,
+        SvgPicture.asset(
+          'assets/icons/onboarding/diag_shield_check.svg',
+          width: 14,
+          height: 14,
+          fit: BoxFit.contain,
         ),
         const SizedBox(width: 4),
         Text(
