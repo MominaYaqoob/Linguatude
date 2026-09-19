@@ -77,4 +77,43 @@ abstract final class AppColors {
   static const diagChipBg = Color(0xFFEFF6FF);
   static const diagContinueShadow = Color(0x402563EB);
   static const diagBodyText = Color(0xFF1E293B);
+
+  // Dashboard / Home (DASH-001, DASH-002)
+  static const dashBg = Color(0xFFF8FAFC);
+  static const dashHeroGradientStart = Color(0xFF2563EB);
+  static const dashHeroGradientEnd = Color(0xFF4F46E5);
+  static const dashRingTrack = Color(0x33FFFFFF);
+  static const dashRingProgress = Color(0xFFFFFFFF);
+  static const dashCountdownBg = Color(0x26FFFFFF);
+  static const dashBellDot = Color(0xFFEF4444);
+  static const dashCardShadow = Color(0x0F0F172A);
+  static const dashReadingIcon = Color(0xFF2563EB);
+  static const dashReadingIconBg = Color(0xFFEFF6FF);
+  static const dashWritingIcon = Color(0xFF7C3AED);
+  static const dashWritingIconBg = Color(0xFFF5F3FF);
+  static const dashListeningIcon = Color(0xFF059669);
+  static const dashListeningIconBg = Color(0xFFECFDF5);
+  static const dashPillBg = Color(0xFFF1F5F9);
+  static const dashDoneBadgeBg = Color(0xFFDCFCE7);
+  static const dashDoneBadgeText = Color(0xFF15803D);
+  static const dashInsightBg = Color(0xFFFFFBEB);
+  static const dashInsightBorder = Color(0xFFFDE68A);
+  static const dashInsightIcon = Color(0xFFB45309);
+  static const dashNavInactive = Color(0xFF94A3B8);
+
+  // Daily Goal Complete overlay (DASH-002)
+  static const goalOverlayScrim = Color(0xCC0F172A);
+  static const goalCardShadow = Color(0x333B82F6);
+  static const goalFlameBg = Color(0xFFFFF1E6);
+  static const goalStreakCardBg = Color(0xFFFFF7ED);
+  static const goalStreakCardBorder = Color(0xFFFED7AA);
+  static const goalXpCardBg = Color(0xFFEFF6FF);
+  static const goalXpCardBorder = Color(0xFFBFDBFE);
+  static const goalMilestoneBg = Color(0xFFFFFBEB);
+  static const goalMilestoneBorder = Color(0xFFFDE68A);
+  static const goalMilestoneIconBg = Color(0xFFFDE68A);
+  static const goalKeepGoingBg = Color(0xFFF8FAFC);
+  static const goalKeepGoingBorder = Color(0xFFE2E8F0);
+  static const goalKeepGoingIconBg = Color(0xFFEFF6FF);
+  static const goalButtonShadow = Color(0x402563EB);
 }

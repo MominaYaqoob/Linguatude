@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/app_colors.dart';
+import '../dashboard/dashboard_home_screen.dart';
 
 class OnboardingDiagnosticReadingScreen extends StatefulWidget {
   const OnboardingDiagnosticReadingScreen({super.key});
@@ -69,7 +70,10 @@ class _OnboardingDiagnosticReadingScreenState
 
   void _continue() {
     if (_selectedOption == null) return;
-    // ONBD-006 Writing/Speaking sections are not built yet — nothing further to navigate to.
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => const DashboardHomeScreen()),
+      (route) => false,
+    );
   }
 
   @override
