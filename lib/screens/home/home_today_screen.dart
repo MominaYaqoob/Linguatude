@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/app_colors.dart';
 import '../../widgets/dashboard/daily_goal_complete_dialog.dart';
+import '../streak/streak_gamification_screen.dart';
 
 class _Lesson {
   const _Lesson({
@@ -150,7 +151,7 @@ class HomeTodayScreen extends StatelessWidget {
         bottom: false,
         child: Column(
           children: [
-            _buildHeader(),
+            _buildHeader(context),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
@@ -179,7 +180,7 @@ class HomeTodayScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       color: AppColors.white,
@@ -203,28 +204,37 @@ class HomeTodayScreen extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              color: AppColors.homeStreakBg,
-              borderRadius: BorderRadius.circular(9999),
-              border: Border.all(color: AppColors.homeStreakBorder),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text('🔥', style: TextStyle(fontSize: 14)),
-                const SizedBox(width: 4),
-                Text(
-                  '7',
-                  style: GoogleFonts.inter(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    height: 20 / 14,
-                    color: AppColors.homeStreakText,
-                  ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => const StreakGamificationScreen(),
                 ),
-              ],
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: AppColors.homeStreakBg,
+                borderRadius: BorderRadius.circular(9999),
+                border: Border.all(color: AppColors.homeStreakBorder),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('🔥', style: TextStyle(fontSize: 14)),
+                  const SizedBox(width: 4),
+                  Text(
+                    '7',
+                    style: GoogleFonts.inter(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      height: 20 / 14,
+                      color: AppColors.homeStreakText,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(width: 12),

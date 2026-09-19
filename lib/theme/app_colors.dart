@@ -181,4 +181,38 @@ abstract final class AppColors {
   static const goalKeepGoingBorder = Color(0xFFE2E8F0);
   static const goalKeepGoingIconBg = Color(0xFFEFF6FF);
   static const goalButtonShadow = Color(0x402563EB);
+
+  // Streak & Gamification (DASH-003)
+  static const streakHeroBg = Color(0xFFEFF6FF);
+  static const streakHeroBorder = Color(0xFFC0D3FF);
+  static const streakHeroGlow = Color(0xFFD1DFFF);
+  static const streakFlameStart = Color(0xFFEA580C);
+  static const streakFlameEnd = Color(0xFFFBBF24);
+  static const streakDivider = Color(0x99334155);
+  static const streakCardBorder = Color(0xFFE1F0FF);
+  static const streakLevelBadgeBg = Color(0xFF2563EB);
+  static const streakLevelBadgeShadow = Color(0x4D3B82F6);
+  static const streakLockedBg = Color(0xFFE2E8F0);
+  static const streakLockedIcon = Color(0xFF94A3B8);
+  static const streakHeatmapFilled = Color(0xFF2563EB);
+  static const streakHeatmapMissed = Color(0xFFE2E8F0);
+  static const streakHeatmapFuture = Color(0xFFF1F5F9);
+  static const streakBadgeCardBg = Color(0xFFF6F9FF);
+  static const streakBadgeCardBorder = Color(0xFFBFDEFD);
+  static const streakBadgeOrangeStart = Color(0xFFFBBF24);
+  static const streakBadgeOrangeEnd = Color(0xFFF97316);
+  static const streakBadgeTealStart = Color(0xFF34D399);
+  static const streakBadgeTealEnd = Color(0xFF059669);
+  static const streakBadgePurpleStart = Color(0xFFC084FC);
+  static const streakBadgePurpleEnd = Color(0xFF9333EA);
+  static const streakBadgeBlueStart = Color(0xFF60A5FA);
+  static const streakBadgeBlueEnd = Color(0xFF2563EB);
+  static const streakStatIconBlueBg = Color(0xFFEFF6FF);
+  static const streakStatIconPurpleBg = Color(0xFFFAF5FF);
+  static const streakStatIconAmberBg = Color(0xFFFFFBEB);
+  static const streakStatIconGreenBg = Color(0xFFECFDF5);
+  static const streakStatBlue = Color(0xFF2563EB);
+  static const streakStatPurple = Color(0xFF9333EA);
+  static const streakStatAmber = Color(0xFFD97706);
+  static const streakStatGreen = Color(0xFF059669);
 }
