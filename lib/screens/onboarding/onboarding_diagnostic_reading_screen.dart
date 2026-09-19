@@ -1,10 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/app_colors.dart';
-import '../dashboard/dashboard_home_screen.dart';
+import 'onboarding_diagnostic_results_screen.dart';
 
 class OnboardingDiagnosticReadingScreen extends StatefulWidget {
   const OnboardingDiagnosticReadingScreen({super.key});
@@ -70,9 +71,10 @@ class _OnboardingDiagnosticReadingScreenState
 
   void _continue() {
     if (_selectedOption == null) return;
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => const DashboardHomeScreen()),
-      (route) => false,
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => const OnboardingDiagnosticResultsScreen(),
+      ),
     );
   }
 
@@ -108,48 +110,57 @@ class _OnboardingDiagnosticReadingScreenState
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            Container(
-              width: 32,
-              height: 32,
-              decoration: BoxDecoration(
-                color: AppColors.diagPrimary,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              alignment: Alignment.center,
-              child: const Icon(
-                Icons.bolt_rounded,
-                size: 20,
-                color: AppColors.white,
-              ),
-            ),
-            const SizedBox(width: 8),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Reading',
-                  style: GoogleFonts.inter(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    height: 20 / 16,
-                    color: AppColors.slate,
-                  ),
+        Expanded(
+          child: Row(
+            children: [
+              Container(
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  color: AppColors.diagPrimary,
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                Text(
-                  'Section 2 of 4',
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    height: 16 / 12,
-                    color: AppColors.slateMuted,
-                  ),
+                alignment: Alignment.center,
+                child: SvgPicture.asset(
+                  'assets/icons/onboarding/diag_bolt.svg',
+                  width: 20,
+                  height: 20,
+                  fit: BoxFit.contain,
                 ),
-              ],
-            ),
-          ],
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Reading',
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.inter(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        height: 20 / 16,
+                        color: AppColors.slate,
+                      ),
+                    ),
+                    Text(
+                      'Section 2 of 4',
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        height: 16 / 12,
+                        color: AppColors.slateMuted,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
+        const SizedBox(width: 12),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 7),
           decoration: BoxDecoration(
@@ -160,10 +171,11 @@ class _OnboardingDiagnosticReadingScreenState
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(
-                Icons.access_time_rounded,
-                size: 14,
-                color: AppColors.slateBody,
+              SvgPicture.asset(
+                'assets/icons/onboarding/diag_clock.svg',
+                width: 14,
+                height: 14,
+                fit: BoxFit.contain,
               ),
               const SizedBox(width: 6),
               Text.rich(
@@ -229,10 +241,11 @@ class _OnboardingDiagnosticReadingScreenState
               ],
             ),
             alignment: Alignment.center,
-            child: const Icon(
-              Icons.menu_book_rounded,
-              size: 20,
-              color: AppColors.diagPrimary,
+            child: SvgPicture.asset(
+              'assets/icons/onboarding/diag_book.svg',
+              width: 20,
+              height: 20,
+              fit: BoxFit.contain,
             ),
           ),
           const SizedBox(width: 12),
@@ -308,12 +321,14 @@ class _OnboardingDiagnosticReadingScreenState
                       ),
                     ),
                     const SizedBox(width: 4),
-                    Icon(
-                      _passageExpanded
-                          ? Icons.keyboard_arrow_up_rounded
-                          : Icons.keyboard_arrow_down_rounded,
-                      size: 16,
-                      color: AppColors.diagPrimary,
+                    Transform.flip(
+                      flipY: !_passageExpanded,
+                      child: SvgPicture.asset(
+                        'assets/icons/onboarding/diag_chevron_up.svg',
+                        width: 10,
+                        height: 6.13,
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ],
                 ),
@@ -350,10 +365,11 @@ class _OnboardingDiagnosticReadingScreenState
           ),
           child: Row(
             children: [
-              const Icon(
-                Icons.info_outline_rounded,
-                size: 16,
-                color: AppColors.diagStatusText,
+              SvgPicture.asset(
+                'assets/icons/onboarding/diag_info_circle.svg',
+                width: 16,
+                height: 16,
+                fit: BoxFit.contain,
               ),
               const SizedBox(width: 8),
               Text(
@@ -419,7 +435,12 @@ class _OnboardingDiagnosticReadingScreenState
               ),
               alignment: Alignment.center,
               child: selected
-                  ? const Icon(Icons.check, size: 12, color: AppColors.white)
+                  ? SvgPicture.asset(
+                      'assets/icons/onboarding/check_white.svg',
+                      width: 12,
+                      height: 12,
+                      fit: BoxFit.contain,
+                    )
                   : null,
             ),
             const SizedBox(width: 14),
@@ -488,10 +509,11 @@ class _OnboardingDiagnosticReadingScreenState
                 ),
               ),
               const SizedBox(width: 8),
-              const Icon(
-                Icons.arrow_forward_rounded,
-                size: 20,
-                color: AppColors.white,
+              SvgPicture.asset(
+                'assets/icons/onboarding/diag_arrow_forward.svg',
+                width: 20,
+                height: 20,
+                fit: BoxFit.contain,
               ),
             ],
           ),
@@ -504,9 +526,12 @@ class _OnboardingDiagnosticReadingScreenState
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _footerItem('All answers are saved automatically'),
+          Expanded(
+            child: _footerItem('All answers are saved automatically'),
+          ),
+          const SizedBox(width: 12),
           _footerItem('Secure & private'),
         ],
       ),
@@ -516,20 +541,24 @@ class _OnboardingDiagnosticReadingScreenState
   Widget _footerItem(String text) {
     return Row(
       mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Icon(
-          Icons.verified_user_outlined,
-          size: 14,
-          color: AppColors.slateMuted,
+        SvgPicture.asset(
+          'assets/icons/onboarding/diag_shield_check.svg',
+          width: 14,
+          height: 14,
+          fit: BoxFit.contain,
         ),
         const SizedBox(width: 4),
-        Text(
-          text,
-          style: GoogleFonts.inter(
-            fontSize: 11,
-            fontWeight: FontWeight.w600,
-            height: 16.5 / 11,
-            color: AppColors.slateMuted,
+        Flexible(
+          child: Text(
+            text,
+            style: GoogleFonts.inter(
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              height: 16.5 / 11,
+              color: AppColors.slateMuted,
+            ),
           ),
         ),
       ],

@@ -418,7 +418,11 @@ class _DailyGoalCompleteDialogState extends State<DailyGoalCompleteDialog> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(Icons.info_outline_rounded, size: 14, color: AppColors.slateMuted),
+        const Icon(
+          Icons.info_outline_rounded,
+          size: 14,
+          color: AppColors.slateMuted,
+        ),
         const SizedBox(width: 8),
         Flexible(
           child: Text(
