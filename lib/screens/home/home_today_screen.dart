@@ -663,6 +663,12 @@ class HomeTodayScreen extends StatelessWidget {
                       offset: const Offset(0, 2),
                       blurRadius: 4,
                     ),
+                    BoxShadow(
+                      color: lesson.gradientEnd.withValues(alpha: 0.15),
+                      offset: const Offset(0, 4),
+                      blurRadius: 6,
+                      spreadRadius: -1,
+                    ),
                   ],
                 ),
                 alignment: Alignment.center,
@@ -1021,57 +1027,108 @@ class HomeTodayScreen extends StatelessWidget {
 
   Widget _buildQuickActionCard(_QuickAction action) {
     return Container(
+      clipBehavior: Clip.none,
       padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 8),
       decoration: BoxDecoration(
         color: action.background,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.homeHeroBorder),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Color(0x40000000),
-            offset: Offset(0, 4),
+            color: action.iconColor.withValues(alpha: 0.16),
+            offset: const Offset(0, 4),
             blurRadius: 4,
+          ),
+          BoxShadow(
+            color: action.iconColor.withValues(alpha: 0.1),
+            offset: const Offset(0, 6),
+            blurRadius: 8,
+            spreadRadius: -2,
           ),
         ],
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      child: Stack(
+        clipBehavior: Clip.none,
         children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: action.iconBackground,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            alignment: Alignment.center,
-            child: SvgPicture.asset(
-              action.icon,
-              width: 18,
-              height: 18,
-              colorFilter: ColorFilter.mode(action.iconColor, BlendMode.srcIn),
-            ),
-          ),
-          const SizedBox(height: 12),
-          Row(
+          Column(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Flexible(
-                child: Text(
-                  action.label,
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    height: 15 / 12,
-                    color: AppColors.slate,
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: action.iconBackground,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: action.iconColor.withValues(alpha: 0.25),
+                      offset: const Offset(0, 2),
+                      blurRadius: 4,
+                    ),
+                  ],
+                ),
+                alignment: Alignment.center,
+                child: SvgPicture.asset(
+                  action.icon,
+                  width: 18,
+                  height: 18,
+                  colorFilter: ColorFilter.mode(
+                    action.iconColor,
+                    BlendMode.srcIn,
                   ),
                 ),
               ),
+              const SizedBox(height: 12),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: Text(
+                      action.label,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        height: 15 / 12,
+                        color: AppColors.slate,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
+          ),
+          Positioned(
+            right: -4,
+            top: -4,
+            child: Container(
+              width: 18,
+              height: 18,
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: action.iconColor.withValues(alpha: 0.2),
+                    offset: const Offset(0, 1),
+                    blurRadius: 3,
+                  ),
+                ],
+              ),
+              alignment: Alignment.center,
+              child: SvgPicture.asset(
+                'assets/icons/onboarding/chevron_right_blue.svg',
+                width: 4,
+                height: 7,
+                colorFilter: ColorFilter.mode(
+                  action.iconColor,
+                  BlendMode.srcIn,
+                ),
+              ),
+            ),
           ),
         ],
       ),
