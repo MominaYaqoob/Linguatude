@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/app_colors.dart';
+import 'onboarding_diagnostic_reading_screen.dart';
 
 class _DiagnosticQuestion {
   const _DiagnosticQuestion({required this.text, required this.options});
@@ -106,7 +108,11 @@ class _OnboardingDiagnosticActiveScreenState
 
   void _submit() {
     if (!_allAnswered) return;
-    // ONBD-007 (Diagnostic Results) is not built yet — nothing to navigate to.
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => const OnboardingDiagnosticReadingScreen(),
+      ),
+    );
   }
 
   @override
@@ -152,49 +158,58 @@ class _OnboardingDiagnosticActiveScreenState
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: AppColors.diagPrimary,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                alignment: Alignment.center,
-                child: const Icon(
-                  Icons.headphones_rounded,
-                  size: 20,
-                  color: AppColors.white,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Listening',
-                    style: GoogleFonts.inter(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
-                      height: 20 / 14,
-                      letterSpacing: -0.35,
-                      color: AppColors.slate,
-                    ),
+          Expanded(
+            child: Row(
+              children: [
+                Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: AppColors.diagPrimary,
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                  Text(
-                    'Section 1 of 4',
-                    style: GoogleFonts.inter(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      height: 16 / 12,
-                      color: AppColors.slateMuted,
-                    ),
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset(
+                    'assets/icons/onboarding/diag_headphones.svg',
+                    width: 20,
+                    height: 20,
+                    fit: BoxFit.contain,
                   ),
-                ],
-              ),
-            ],
+                ),
+                const SizedBox(width: 12),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Listening',
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          height: 20 / 14,
+                          letterSpacing: -0.35,
+                          color: AppColors.slate,
+                        ),
+                      ),
+                      Text(
+                        'Section 1 of 4',
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          height: 16 / 12,
+                          color: AppColors.slateMuted,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
+          const SizedBox(width: 12),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 7),
             decoration: BoxDecoration(
@@ -205,10 +220,11 @@ class _OnboardingDiagnosticActiveScreenState
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(
-                  Icons.access_time_rounded,
-                  size: 14,
-                  color: AppColors.slateBody,
+                SvgPicture.asset(
+                  'assets/icons/onboarding/diag_clock.svg',
+                  width: 14,
+                  height: 14,
+                  fit: BoxFit.contain,
                 ),
                 const SizedBox(width: 6),
                 Text.rich(
@@ -336,12 +352,13 @@ class _OnboardingDiagnosticActiveScreenState
                     ],
                   ),
                   alignment: Alignment.center,
-                  child: Icon(
+                  child: SvgPicture.asset(
                     _isPlaying
-                        ? Icons.pause_rounded
-                        : Icons.play_arrow_rounded,
-                    size: 20,
-                    color: AppColors.white,
+                        ? 'assets/icons/onboarding/diag_pause.svg'
+                        : 'assets/icons/onboarding/diag_play.svg',
+                    width: 20,
+                    height: 20,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
@@ -469,10 +486,11 @@ class _OnboardingDiagnosticActiveScreenState
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(
-            Icons.volume_up_rounded,
-            size: 16,
-            color: AppColors.diagStatusText,
+          SvgPicture.asset(
+            'assets/icons/onboarding/diag_volume.svg',
+            width: 16,
+            height: 16,
+            fit: BoxFit.contain,
           ),
           const SizedBox(width: 8),
           Flexible(
@@ -519,10 +537,11 @@ class _OnboardingDiagnosticActiveScreenState
           ),
           child: Row(
             children: [
-              const Icon(
-                Icons.info_outline_rounded,
-                size: 16,
-                color: AppColors.diagStatusText,
+              SvgPicture.asset(
+                'assets/icons/onboarding/diag_info_circle.svg',
+                width: 16,
+                height: 16,
+                fit: BoxFit.contain,
               ),
               const SizedBox(width: 8),
               Text(
@@ -635,7 +654,12 @@ class _OnboardingDiagnosticActiveScreenState
               ),
               alignment: Alignment.center,
               child: selected
-                  ? const Icon(Icons.check, size: 10, color: AppColors.white)
+                  ? SvgPicture.asset(
+                      'assets/icons/onboarding/check_white.svg',
+                      width: 10,
+                      height: 10,
+                      fit: BoxFit.contain,
+                    )
                   : null,
             ),
             const SizedBox(width: 12),
