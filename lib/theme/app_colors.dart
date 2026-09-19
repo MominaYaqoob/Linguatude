@@ -122,4 +122,47 @@ abstract final class AppColors {
   static const planLessonGreenBorder = Color(0xFFD1FAE5);
   static const planLessonGreenIcon = Color(0xFF059669);
   static const planExploreLink = Color(0xFF64748B);
+
+  // Home / Today (DASH-001)
+  static const homeStreakBg = Color(0xFFFFFBEB);
+  static const homeStreakBorder = Color(0xFFFEF3C7);
+  static const homeStreakText = Color(0xFFD97706);
+  static const homeNotifBadge = Color(0xFFEF4444);
+  static const homeBannerBg = Color(0xCCFFFBEB);
+  static const homeBannerBorder = Color(0x99FDE68A);
+  static const homeBannerIconBg = Color(0xFFFEF3C7);
+  static const homeBannerHeading = Color(0xFF1E293B);
+  static const homeHeroBorder = Color(0x99DBEAFE);
+  static const homeHeroDecor = Color(0x66DBEAFE);
+  static const homeRingTrack = Color(0xFFD9D9D9);
+  static const homeCountdownCardBg = Color(0xE6FFFFFF);
+  static const homeCountdownCardBorder = Color(0xFFF1F5F9);
+  static const homeStatIconBg = Color(0xFFEFF6FF);
+  static const homeLessonReadingBorder = Color(0x333B82F6);
+  static const homeLessonBorder = Color(0xFFF1F5F9);
+  static const homeGradBlueStart = Color(0xFF3B82F6);
+  static const homeGradBlueEnd = Color(0xFF2563EB);
+  static const homeGradOrangeStart = Color(0xFFFBBF24);
+  static const homeGradOrangeEnd = Color(0xFFF97316);
+  static const homeGradPurpleStart = Color(0xFFA855F7);
+  static const homeGradPurpleEnd = Color(0xFF4C46E5);
+  static const homeBadgeIntermediateBg = Color(0xFFFFF7ED);
+  static const homeBadgeIntermediateBorder = Color(0xFFFFEDD5);
+  static const homeBadgeIntermediateText = Color(0xFFEA580C);
+  static const homeBadgeBeginnerBg = Color(0xFFECFDF5);
+  static const homeBadgeBeginnerBorder = Color(0xFFD1FAE5);
+  static const homeBadgeBeginnerText = Color(0xFF059669);
+  static const homeUpNextBg = Color(0xFFF8FAFC);
+  static const homeUpNextBorder = Color(0xFFDBEAFE);
+  static const homeStatsCardBorder = Color(0xFFA5C3E8);
+  static const homeQuickBlueBg = Color(0xFFF4F9FF);
+  static const homeQuickBlueIconBg = Color(0xCCDBEAFE);
+  static const homeQuickPurpleBg = Color(0xFFF3E8FF);
+  static const homeQuickPurpleIconBg = Color(0xCCE9D5FF);
+  static const homeQuickOrangeBg = Color(0xFFFFFBEB);
+  static const homeQuickOrangeIconBg = Color(0xCCFEF3C7);
+  static const homeQuickGreenBg = Color(0xFFECFDF5);
+  static const homeQuickGreenIconBg = Color(0xCCD1FAE5);
+  static const homeInsightIconBg = Color(0xFFFEF3C7);
+  static const homeNavInactive = Color(0xFF94A3B8);
 }

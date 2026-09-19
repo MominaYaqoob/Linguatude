@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/app_colors.dart';
+import '../home/home_today_screen.dart';
 
 class _Lesson {
   const _Lesson({
@@ -70,8 +71,10 @@ class _OnboardingDiagnosticStudyPlanScreenState
 
   int _selectedDuration = 1;
 
-  void _startLearning() {
-    // Next screen in the flow is not built yet.
+  void _startLearning(BuildContext context) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => const HomeTodayScreen()),
+    );
   }
 
   void _exploreOnMyOwn() {
@@ -130,7 +133,7 @@ class _OnboardingDiagnosticStudyPlanScreenState
                 _buildLessonCard(_lessons[i]),
               ],
               const SizedBox(height: 40),
-              _buildStartButton(),
+              _buildStartButton(context),
               const SizedBox(height: 16),
               Center(
                 child: GestureDetector(
@@ -509,7 +512,7 @@ class _OnboardingDiagnosticStudyPlanScreenState
     );
   }
 
-  Widget _buildStartButton() {
+  Widget _buildStartButton(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 52,
@@ -531,7 +534,7 @@ class _OnboardingDiagnosticStudyPlanScreenState
         ],
       ),
       child: ElevatedButton(
-        onPressed: _startLearning,
+        onPressed: () => _startLearning(context),
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.diagPrimary,
           foregroundColor: AppColors.white,
