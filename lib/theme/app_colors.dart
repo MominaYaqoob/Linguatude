@@ -215,4 +215,28 @@ abstract final class AppColors {
   static const streakStatPurple = Color(0xFF9333EA);
   static const streakStatAmber = Color(0xFFD97706);
   static const streakStatGreen = Color(0xFF059669);
+
+  // Mock Test Prompt (DASH-004)
+  static const mockCardBg = Color(0xFFDAE6FF);
+  static const mockCardShadow = Color(0x33F59E0B);
+  static const mockTagText = Color(0xFF191C1D);
+  static const mockTitle = Color(0xFF0F172A);
+  static const mockDescription = Color(0xCC1E293B);
+  static const mockBadgeBg = Color(0xE6FFFFFF);
+  static const mockBadgeIcon = Color(0xFF475569);
+  static const mockBadgeText = Color(0xFF1E293B);
+  static const mockSecondaryLink = Color(0xFF1E3A8A);
+  static const quickCardBg = Color(0xFFF6F9FF);
+  static const quickCardBorder = Color(0xFFBFDEFD);
+  static const quickStudyIconBg = Color(0xFFEFF6FF);
+  static const quickStudyIcon = Color(0xFF2563EB);
+  static const quickPracticeIconBg = Color(0xFFECFDF5);
+  static const quickPracticeIcon = Color(0xFF059669);
+  static const quickProgressIconBg = Color(0xFFFAF5FF);
+  static const quickProgressIcon = Color(0xFF9333EA);
+  static const quickPlanIconBg = Color(0xFFFFF7ED);
+  static const quickPlanIcon = Color(0xFFEA580C);
+  static const quickCardTitle = Color(0xFF0F172A);
+  static const quickCardSubtitle = Color(0xFF94A3B8);
+  static const quickCardChevron = Color(0xFFCBD5E1);
 }

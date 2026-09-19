@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../theme/app_colors.dart';
 import '../../widgets/dashboard/daily_goal_complete_dialog.dart';
 import '../streak/streak_gamification_screen.dart';
+import 'mock_test_prompt_screen.dart';
 
 class _Lesson {
   const _Lesson({
@@ -409,7 +410,7 @@ class HomeTodayScreen extends StatelessWidget {
                   children: [
                     _buildGoalRing(context),
                     const SizedBox(width: 16),
-                    Expanded(child: _buildCountdownCard()),
+                    Expanded(child: _buildCountdownCard(context)),
                   ],
                 ),
               ],
@@ -491,95 +492,102 @@ class HomeTodayScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCountdownCard() {
-    return Container(
-      padding: const EdgeInsets.all(17),
-      decoration: BoxDecoration(
-        color: AppColors.homeCountdownCardBg,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.homeCountdownCardBorder),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0D000000),
-            offset: Offset(0, 1),
-            blurRadius: 2,
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              SvgPicture.asset(
-                'assets/icons/onboarding/calendar_sm.svg',
-                width: 12,
-                height: 14,
-              ),
-              const SizedBox(width: 6),
-              Expanded(
-                child: Text(
-                  '24 Aug, 2026',
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    height: 16 / 12,
-                    color: AppColors.dateHint,
+  Widget _buildCountdownCard(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (_) => const MockTestPromptScreen()));
+      },
+      child: Container(
+        padding: const EdgeInsets.all(17),
+        decoration: BoxDecoration(
+          color: AppColors.homeCountdownCardBg,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.homeCountdownCardBorder),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x0D000000),
+              offset: Offset(0, 1),
+              blurRadius: 2,
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/onboarding/calendar_sm.svg',
+                  width: 12,
+                  height: 14,
+                ),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    '24 Aug, 2026',
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      height: 16 / 12,
+                      color: AppColors.dateHint,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      '12 days',
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.inter(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        height: 23 / 16,
-                        color: AppColors.diagPrimary,
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        '12 days',
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          height: 23 / 16,
+                          color: AppColors.diagPrimary,
+                        ),
                       ),
-                    ),
-                    Text(
-                      'to your test',
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.inter(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        height: 17 / 12,
-                        color: AppColors.slateMuted,
+                      Text(
+                        'to your test',
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          height: 17 / 12,
+                          color: AppColors.slateMuted,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                width: 32,
-                height: 32,
-                decoration: const BoxDecoration(
-                  color: AppColors.homeStatIconBg,
-                  shape: BoxShape.circle,
+                Container(
+                  width: 32,
+                  height: 32,
+                  decoration: const BoxDecoration(
+                    color: AppColors.homeStatIconBg,
+                    shape: BoxShape.circle,
+                  ),
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset(
+                    'assets/icons/onboarding/chevron_right_blue.svg',
+                    width: 5,
+                    height: 9,
+                  ),
                 ),
-                alignment: Alignment.center,
-                child: SvgPicture.asset(
-                  'assets/icons/onboarding/chevron_right_blue.svg',
-                  width: 5,
-                  height: 9,
-                ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
