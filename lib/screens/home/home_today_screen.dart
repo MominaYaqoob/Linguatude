@@ -5,6 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/app_colors.dart';
+import '../../widgets/dashboard/daily_goal_complete_dialog.dart';
+import '../streak/streak_gamification_screen.dart';
+import 'mock_test_prompt_screen.dart';
 
 class _Lesson {
   const _Lesson({
@@ -12,6 +15,7 @@ class _Lesson {
     required this.icon,
     required this.gradientStart,
     required this.gradientEnd,
+    required this.badgeColor,
     required this.title,
     required this.subtitle,
     required this.time,
@@ -28,6 +32,7 @@ class _Lesson {
   final String icon;
   final Color gradientStart;
   final Color gradientEnd;
+  final Color badgeColor;
   final String title;
   final String subtitle;
   final String time;
@@ -59,12 +64,16 @@ class _QuickAction {
 class HomeTodayScreen extends StatelessWidget {
   const HomeTodayScreen({super.key});
 
+  static const _homeIcons = 'assets/icons/home';
+  static const _mockIcons = 'assets/icons/home/mock';
+
   static const _lessons = [
     _Lesson(
       number: 1,
-      icon: 'assets/icons/onboarding/diag_book.svg',
+      icon: 'assets/icons/home/goal/book.svg',
       gradientStart: AppColors.homeGradBlueStart,
       gradientEnd: AppColors.homeGradBlueEnd,
+      badgeColor: AppColors.diagPrimary,
       title: 'Reading',
       subtitle: 'Main Idea & Details',
       time: '10 min',
@@ -81,6 +90,7 @@ class HomeTodayScreen extends StatelessWidget {
       icon: 'assets/icons/onboarding/pencil.svg',
       gradientStart: AppColors.homeGradOrangeStart,
       gradientEnd: AppColors.homeGradOrangeEnd,
+      badgeColor: AppColors.homeGradOrangeEnd,
       title: 'Writing',
       subtitle: 'Task 2: Essay Structure',
       time: '15 min',
@@ -97,6 +107,7 @@ class HomeTodayScreen extends StatelessWidget {
       icon: 'assets/icons/onboarding/diag_headphones.svg',
       gradientStart: AppColors.homeGradPurpleStart,
       gradientEnd: AppColors.homeGradPurpleEnd,
+      badgeColor: Color(0xFF9333EA),
       title: 'Listening',
       subtitle: 'Section 2: Practice',
       time: '15 min',
@@ -121,21 +132,21 @@ class HomeTodayScreen extends StatelessWidget {
     _QuickAction(
       icon: 'assets/icons/home/clipboard.svg',
       label: 'Take Mock test',
-      background: AppColors.homeQuickPurpleBg,
+      background: AppColors.homeQuickBlueBg,
       iconBackground: AppColors.homeQuickPurpleIconBg,
       iconColor: Color(0xFF9333EA),
     ),
     _QuickAction(
       icon: 'assets/icons/onboarding/pencil.svg',
       label: 'Write an Essay',
-      background: AppColors.homeQuickOrangeBg,
+      background: AppColors.homeQuickBlueBg,
       iconBackground: AppColors.homeQuickOrangeIconBg,
       iconColor: AppColors.homeStreakText,
     ),
     _QuickAction(
       icon: 'assets/icons/home/chart_up.svg',
-      label: 'Write an Essay',
-      background: AppColors.homeQuickGreenBg,
+      label: 'View Progress',
+      background: AppColors.homeQuickBlueBg,
       iconBackground: AppColors.homeQuickGreenIconBg,
       iconColor: AppColors.homeBadgeBeginnerText,
     ),
@@ -149,7 +160,7 @@ class HomeTodayScreen extends StatelessWidget {
         bottom: false,
         child: Column(
           children: [
-            _buildHeader(),
+            _buildHeader(context),
             Expanded(
               child: SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
@@ -158,7 +169,7 @@ class HomeTodayScreen extends StatelessWidget {
                   children: [
                     _buildEmailBanner(),
                     const SizedBox(height: 20),
-                    _buildDailyGoalCard(),
+                    _buildDailyGoalCard(context),
                     const SizedBox(height: 20),
                     _buildLessonsSection(),
                     const SizedBox(height: 20),
@@ -178,7 +189,7 @@ class HomeTodayScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
       color: AppColors.white,
@@ -202,28 +213,37 @@ class HomeTodayScreen extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-            decoration: BoxDecoration(
-              color: AppColors.homeStreakBg,
-              borderRadius: BorderRadius.circular(9999),
-              border: Border.all(color: AppColors.homeStreakBorder),
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text('🔥', style: TextStyle(fontSize: 14)),
-                const SizedBox(width: 4),
-                Text(
-                  '7',
-                  style: GoogleFonts.inter(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                    height: 20 / 14,
-                    color: AppColors.homeStreakText,
-                  ),
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => const StreakGamificationScreen(),
                 ),
-              ],
+              );
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: AppColors.homeStreakBg,
+                borderRadius: BorderRadius.circular(9999),
+                border: Border.all(color: AppColors.homeStreakBorder),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('🔥', style: TextStyle(fontSize: 14)),
+                  const SizedBox(width: 4),
+                  Text(
+                    '7',
+                    style: GoogleFonts.inter(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      height: 20 / 14,
+                      color: AppColors.homeStreakText,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(width: 12),
@@ -335,7 +355,7 @@ class HomeTodayScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildDailyGoalCard() {
+  Widget _buildDailyGoalCard(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
@@ -396,9 +416,9 @@ class HomeTodayScreen extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    _buildGoalRing(),
+                    _buildGoalRing(context),
                     const SizedBox(width: 16),
-                    Expanded(child: _buildCountdownCard()),
+                    Expanded(child: _buildCountdownCard(context)),
                   ],
                 ),
               ],
@@ -409,163 +429,173 @@ class HomeTodayScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildGoalRing() {
-    return SizedBox(
-      width: 140,
-      height: 140,
-      child: CustomPaint(
-        painter: _RingPainter(progress: 2 / 3),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                "TODAY'S GOAL",
-                style: GoogleFonts.inter(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w600,
-                  height: 15 / 11,
-                  letterSpacing: 0.5,
-                  color: AppColors.dateHint,
+  Widget _buildGoalRing(BuildContext context) {
+    return GestureDetector(
+      onTap: () => DailyGoalCompleteDialog.show(context),
+      child: SizedBox(
+        width: 140,
+        height: 140,
+        child: CustomPaint(
+          painter: _RingPainter(progress: 2 / 3),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "TODAY'S GOAL",
+                  style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w600,
+                    height: 15 / 11,
+                    letterSpacing: 0.5,
+                    color: AppColors.dateHint,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              RichText(
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: '2',
-                      style: GoogleFonts.inter(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.slate,
+                const SizedBox(height: 4),
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: '2',
+                        style: GoogleFonts.inter(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.slate,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: ' of ',
-                      style: GoogleFonts.inter(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.dateHint,
+                      TextSpan(
+                        text: ' of ',
+                        style: GoogleFonts.inter(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.dateHint,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: '3',
-                      style: GoogleFonts.inter(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.slate,
+                      TextSpan(
+                        text: '3',
+                        style: GoogleFonts.inter(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.slate,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                'lessons done',
-                style: GoogleFonts.inter(
-                  fontSize: 11,
-                  fontWeight: FontWeight.w500,
-                  height: 15 / 11,
-                  color: AppColors.slateMuted,
+                const SizedBox(height: 4),
+                Text(
+                  'lessons done',
+                  style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                    height: 15 / 11,
+                    color: AppColors.slateMuted,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  Widget _buildCountdownCard() {
-    return Container(
-      padding: const EdgeInsets.all(17),
-      decoration: BoxDecoration(
-        color: AppColors.homeCountdownCardBg,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.homeCountdownCardBorder),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x0D000000),
-            offset: Offset(0, 1),
-            blurRadius: 2,
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              SvgPicture.asset(
-                'assets/icons/onboarding/calendar_sm.svg',
-                width: 12,
-                height: 14,
-              ),
-              const SizedBox(width: 6),
-              Expanded(
-                child: Text(
-                  '24 Aug, 2026',
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    height: 16 / 12,
-                    color: AppColors.dateHint,
+  Widget _buildCountdownCard(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(
+          context,
+        ).push(MaterialPageRoute(builder: (_) => const MockTestPromptScreen()));
+      },
+      child: Container(
+        padding: const EdgeInsets.all(17),
+        decoration: BoxDecoration(
+          color: AppColors.homeCountdownCardBg,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: AppColors.homeCountdownCardBorder),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x0D000000),
+              offset: Offset(0, 1),
+              blurRadius: 2,
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                SvgPicture.asset(
+                  'assets/icons/onboarding/calendar_sm.svg',
+                  width: 12,
+                  height: 14,
+                ),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    '24 Aug, 2026',
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.inter(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      height: 16 / 12,
+                      color: AppColors.dateHint,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      '12 days',
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.inter(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        height: 23 / 16,
-                        color: AppColors.diagPrimary,
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        '12 days',
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          height: 23 / 16,
+                          color: AppColors.diagPrimary,
+                        ),
                       ),
-                    ),
-                    Text(
-                      'to your test',
-                      overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.inter(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        height: 17 / 12,
-                        color: AppColors.slateMuted,
+                      Text(
+                        'to your test',
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          height: 17 / 12,
+                          color: AppColors.slateMuted,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                width: 32,
-                height: 32,
-                decoration: const BoxDecoration(
-                  color: AppColors.homeStatIconBg,
-                  shape: BoxShape.circle,
+                Container(
+                  width: 32,
+                  height: 32,
+                  decoration: const BoxDecoration(
+                    color: AppColors.homeStatIconBg,
+                    shape: BoxShape.circle,
+                  ),
+                  alignment: Alignment.center,
+                  child: SvgPicture.asset(
+                    'assets/icons/onboarding/chevron_right_blue.svg',
+                    width: 5,
+                    height: 9,
+                  ),
                 ),
-                alignment: Alignment.center,
-                child: SvgPicture.asset(
-                  'assets/icons/onboarding/chevron_right_blue.svg',
-                  width: 5,
-                  height: 9,
-                ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -618,92 +648,58 @@ class HomeTodayScreen extends StatelessWidget {
           color: lesson.highlighted
               ? AppColors.homeLessonReadingBorder
               : AppColors.homeLessonBorder,
-          width: lesson.highlighted ? 1.5 : 1,
+          width: lesson.highlighted ? 2 : 1,
         ),
-        boxShadow: lesson.highlighted
-            ? const [
-                BoxShadow(
-                  color: Color(0x0D000000),
-                  offset: Offset(0, 1),
-                  blurRadius: 2,
-                ),
-                BoxShadow(
-                  color: Color(0x40000000),
-                  offset: Offset(0, 4),
-                  blurRadius: 4,
-                ),
-              ]
-            : const [
-                BoxShadow(
-                  color: Color(0x0D000000),
-                  offset: Offset(0, 1),
-                  blurRadius: 2,
-                ),
-              ],
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x0D000000),
+            offset: Offset(0, 1),
+            blurRadius: 2,
+          ),
+          BoxShadow(
+            color: Color(0x40000000),
+            offset: Offset(0, 4),
+            blurRadius: 4,
+          ),
+        ],
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [lesson.gradientStart, lesson.gradientEnd],
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: lesson.gradientEnd.withValues(alpha: 0.2),
-                      offset: const Offset(0, 2),
-                      blurRadius: 4,
-                    ),
-                    BoxShadow(
-                      color: lesson.gradientEnd.withValues(alpha: 0.15),
-                      offset: const Offset(0, 4),
-                      blurRadius: 6,
-                      spreadRadius: -1,
-                    ),
-                  ],
-                ),
-                alignment: Alignment.center,
-                child: SvgPicture.asset(
-                  lesson.icon,
-                  width: 22,
-                  height: 22,
-                  colorFilter: const ColorFilter.mode(
-                    Colors.white,
-                    BlendMode.srcIn,
-                  ),
-                ),
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [lesson.gradientStart, lesson.gradientEnd],
               ),
-              Positioned(
-                left: -4,
-                top: -4,
-                child: Container(
-                  width: 16,
-                  height: 16,
-                  decoration: const BoxDecoration(
-                    color: AppColors.diagPrimary,
-                    shape: BoxShape.circle,
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    '${lesson.number}',
-                    style: GoogleFonts.inter(
-                      fontSize: 9,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.white,
-                    ),
-                  ),
+              boxShadow: [
+                BoxShadow(
+                  color: lesson.gradientEnd.withValues(alpha: 0.2),
+                  offset: const Offset(0, 2),
+                  blurRadius: 4,
                 ),
+                BoxShadow(
+                  color: lesson.gradientEnd.withValues(alpha: 0.15),
+                  offset: const Offset(0, 4),
+                  blurRadius: 6,
+                  spreadRadius: -1,
+                ),
+              ],
+            ),
+            alignment: Alignment.center,
+            child: SvgPicture.asset(
+              lesson.icon,
+              width: 22,
+              height: 22,
+              colorFilter: const ColorFilter.mode(
+                Colors.white,
+                BlendMode.srcIn,
               ),
-            ],
+            ),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -711,15 +707,40 @@ class HomeTodayScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  lesson.title,
-                  overflow: TextOverflow.ellipsis,
-                  style: GoogleFonts.inter(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                    height: 20 / 16,
-                    color: AppColors.slate,
-                  ),
+                Row(
+                  children: [
+                    Container(
+                      width: 16,
+                      height: 16,
+                      decoration: BoxDecoration(
+                        color: lesson.badgeColor,
+                        shape: BoxShape.circle,
+                      ),
+                      alignment: Alignment.center,
+                      child: Text(
+                        '${lesson.number}',
+                        style: GoogleFonts.inter(
+                          fontSize: 9,
+                          fontWeight: FontWeight.w700,
+                          height: 15 / 9,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Flexible(
+                      child: Text(
+                        lesson.title,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.inter(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          height: 20 / 16,
+                          color: AppColors.slate,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 2),
                 Text(
@@ -736,16 +757,6 @@ class HomeTodayScreen extends StatelessWidget {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    SvgPicture.asset(
-                      'assets/icons/onboarding/diag_clock.svg',
-                      width: 12,
-                      height: 12,
-                      colorFilter: const ColorFilter.mode(
-                        AppColors.dateHint,
-                        BlendMode.srcIn,
-                      ),
-                    ),
-                    const SizedBox(width: 4),
                     Text(
                       lesson.time,
                       style: GoogleFonts.inter(
@@ -755,7 +766,18 @@ class HomeTodayScreen extends StatelessWidget {
                         color: AppColors.dateHint,
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text(
+                        '·',
+                        style: GoogleFonts.inter(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                          height: 24 / 12,
+                          color: AppColors.homeLessonBorder,
+                        ),
+                      ),
+                    ),
                     Container(
                       padding: const EdgeInsets.symmetric(
                         horizontal: 9,
@@ -961,7 +983,7 @@ class HomeTodayScreen extends StatelessWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
                 height: 23 / 16,
-                color: AppColors.diagPrimary,
+                color: AppColors.slate,
               ),
             ),
           ],
@@ -1027,108 +1049,85 @@ class HomeTodayScreen extends StatelessWidget {
 
   Widget _buildQuickActionCard(_QuickAction action) {
     return Container(
-      clipBehavior: Clip.none,
-      padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 8),
+      height: 131,
+      padding: const EdgeInsets.fromLTRB(8, 17, 8, 17),
       decoration: BoxDecoration(
         color: action.background,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.homeHeroBorder),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
-            color: action.iconColor.withValues(alpha: 0.16),
-            offset: const Offset(0, 4),
+            color: Color(0x40000000),
+            offset: Offset(0, 4),
             blurRadius: 4,
-          ),
-          BoxShadow(
-            color: action.iconColor.withValues(alpha: 0.1),
-            offset: const Offset(0, 6),
-            blurRadius: 8,
-            spreadRadius: -2,
           ),
         ],
       ),
-      child: Stack(
-        clipBehavior: Clip.none,
+      child: Column(
         children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: action.iconBackground,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            alignment: Alignment.center,
+            child: SvgPicture.asset(
+              action.icon,
+              width: 18,
+              height: 18,
+              colorFilter: ColorFilter.mode(
+                action.iconColor,
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
+          const Spacer(),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Expanded(
+                child: Text(
+                  action.label,
+                  textAlign: TextAlign.left,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: GoogleFonts.inter(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    height: 16.5 / 12,
+                    color: AppColors.slate,
+                  ),
+                ),
+              ),
+              const SizedBox(width: 2),
               Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: action.iconBackground,
-                  borderRadius: BorderRadius.circular(12),
+                width: 18,
+                height: 18,
+                decoration: const BoxDecoration(
+                  color: AppColors.white,
+                  shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: action.iconColor.withValues(alpha: 0.25),
-                      offset: const Offset(0, 2),
-                      blurRadius: 4,
+                      color: Color(0x0D000000),
+                      offset: Offset(0, 1),
+                      blurRadius: 2,
                     ),
                   ],
                 ),
                 alignment: Alignment.center,
                 child: SvgPicture.asset(
-                  action.icon,
-                  width: 18,
-                  height: 18,
+                  'assets/icons/onboarding/chevron_right_blue.svg',
+                  width: 4,
+                  height: 7,
                   colorFilter: ColorFilter.mode(
                     action.iconColor,
                     BlendMode.srcIn,
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Flexible(
-                    child: Text(
-                      action.label,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      style: GoogleFonts.inter(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        height: 15 / 12,
-                        color: AppColors.slate,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
             ],
-          ),
-          Positioned(
-            right: -4,
-            top: -4,
-            child: Container(
-              width: 18,
-              height: 18,
-              decoration: BoxDecoration(
-                color: AppColors.white,
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: action.iconColor.withValues(alpha: 0.2),
-                    offset: const Offset(0, 1),
-                    blurRadius: 3,
-                  ),
-                ],
-              ),
-              alignment: Alignment.center,
-              child: SvgPicture.asset(
-                'assets/icons/onboarding/chevron_right_blue.svg',
-                width: 4,
-                height: 7,
-                colorFilter: ColorFilter.mode(
-                  action.iconColor,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
           ),
         ],
       ),
@@ -1155,13 +1154,9 @@ class HomeTodayScreen extends StatelessWidget {
             ),
             alignment: Alignment.center,
             child: SvgPicture.asset(
-              'assets/icons/onboarding/results_star.svg',
-              width: 15,
-              height: 15,
-              colorFilter: const ColorFilter.mode(
-                AppColors.homeStreakText,
-                BlendMode.srcIn,
-              ),
+              '$_homeIcons/lightbulb.svg',
+              width: 20,
+              height: 20,
             ),
           ),
           const SizedBox(width: 12),
@@ -1222,7 +1217,8 @@ class HomeTodayScreen extends StatelessWidget {
 
   Widget _buildBottomNav() {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      height: 64,
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         color: AppColors.white,
         border: Border(top: BorderSide(color: AppColors.homeLessonBorder)),
@@ -1230,43 +1226,76 @@ class HomeTodayScreen extends StatelessWidget {
       child: SafeArea(
         top: false,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildNavItem('assets/icons/home/home_nav.svg', 'Home', true),
-            _buildNavItem('assets/icons/onboarding/diag_book.svg', 'Learn', false),
-            _buildNavItem('assets/icons/home/practice_nav.svg', 'Practice', false),
-            _buildNavItem('assets/icons/home/mock_test_nav.svg', 'Mock Test', false),
-            _buildNavItem('assets/icons/home/person_nav.svg', 'Account', false),
+            _buildNavItem(
+              icon: '$_mockIcons/home_nav.svg',
+              label: 'Home',
+              active: true,
+            ),
+            _buildNavItem(
+              icon: '$_mockIcons/learn_nav.svg',
+              label: 'Learn',
+              active: false,
+            ),
+            _buildNavItem(
+              icon: '$_mockIcons/practice_nav.svg',
+              label: 'Practice',
+              active: false,
+            ),
+            _buildNavItem(
+              icon: '$_mockIcons/mock_nav.svg',
+              label: 'Mock Test',
+              active: false,
+              iconSize: 24,
+            ),
+            _buildNavItem(
+              icon: '$_mockIcons/progress_nav.svg',
+              label: 'Progress',
+              active: false,
+            ),
+            _buildNavItem(
+              icon: '$_mockIcons/account_nav.svg',
+              label: 'Account',
+              active: false,
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildNavItem(String icon, String label, bool active) {
+  Widget _buildNavItem({
+    required String icon,
+    required String label,
+    required bool active,
+    double iconSize = 20,
+  }) {
     final color = active ? AppColors.diagPrimary : AppColors.homeNavInactive;
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        SvgPicture.asset(
-          icon,
-          width: 20,
-          height: 20,
-          colorFilter: active
-              ? null
-              : ColorFilter.mode(color, BlendMode.srcIn),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: GoogleFonts.inter(
-            fontSize: 11,
-            fontWeight: FontWeight.w500,
-            height: 15 / 11,
-            color: color,
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            icon,
+            width: iconSize,
+            height: iconSize,
+            colorFilter:
+                active ? null : ColorFilter.mode(color, BlendMode.srcIn),
           ),
-        ),
-      ],
+          const SizedBox(height: 4),
+          Text(
+            label,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: GoogleFonts.inter(
+              fontSize: 10,
+              fontWeight: FontWeight.w500,
+              height: 15 / 10,
+              color: color,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

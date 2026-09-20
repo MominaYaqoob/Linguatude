@@ -83,40 +83,54 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildStepProgress(),
-              const SizedBox(height: 24),
-              Text(
-                "Here's where you stand",
-                style: GoogleFonts.inter(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w700,
-                  height: 36 / 30,
-                  letterSpacing: -0.75,
-                  color: AppColors.slate,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final width = constraints.maxWidth;
+            final horizontal = (width * 0.0615).clamp(16.0, 24.0);
+            final titleSize = width < 360 ? 26.0 : 30.0;
+
+            return SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(horizontal, 24, horizontal, 24),
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 390),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _buildStepProgress(),
+                      const SizedBox(height: 16),
+                      Text(
+                        "Here's where you stand",
+                        style: GoogleFonts.inter(
+                          fontSize: titleSize,
+                          fontWeight: FontWeight.w700,
+                          height: 1.2,
+                          letterSpacing: -0.75,
+                          color: AppColors.slate,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      _buildInfoBanner(),
+                      const SizedBox(height: 16),
+                      for (var i = 0; i < _scores.length; i++) ...[
+                        if (i > 0) const SizedBox(height: 16),
+                        _buildScoreCard(_scores[i]),
+                      ],
+                      const SizedBox(height: 16),
+                      _buildStrengthCard(),
+                      const SizedBox(height: 12),
+                      _buildFocusCard(),
+                      const SizedBox(height: 12),
+                      _buildDisclaimerCard(),
+                      const SizedBox(height: 16),
+                      _buildStudyPlanButton(context),
+                    ],
+                  ),
                 ),
               ),
-              const SizedBox(height: 16),
-              _buildInfoBanner(),
-              const SizedBox(height: 16),
-              for (var i = 0; i < _scores.length; i++) ...[
-                if (i > 0) const SizedBox(height: 16),
-                _buildScoreCard(_scores[i]),
-              ],
-              const SizedBox(height: 40),
-              _buildStrengthCard(),
-              const SizedBox(height: 12),
-              _buildFocusCard(),
-              const SizedBox(height: 12),
-              _buildDisclaimerCard(),
-              const SizedBox(height: 40),
-              _buildStudyPlanButton(context),
-            ],
-          ),
+            );
+          },
         ),
       ),
     );
@@ -147,7 +161,7 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
             );
           }),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 8),
         Text(
           'Step $_currentStep of $_totalSteps',
           style: GoogleFonts.inter(
@@ -164,27 +178,30 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
   Widget _buildInfoBanner() {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(17),
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
-        color: AppColors.diagBannerBg,
+        color: AppColors.diagChipBg.withValues(alpha: 0.7),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.diagBannerBorder),
         boxShadow: const [
           BoxShadow(
             color: Color(0x40000000),
             offset: Offset(0, 4),
-            blurRadius: 2,
+            blurRadius: 4,
           ),
         ],
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SvgPicture.asset(
-            'assets/icons/onboarding/diag_info_circle.svg',
-            width: 17,
-            height: 17,
-            fit: BoxFit.contain,
+          Padding(
+            padding: const EdgeInsets.only(top: 2),
+            child: SvgPicture.asset(
+              'assets/icons/onboarding/diag_info_circle.svg',
+              width: 20,
+              height: 20,
+              fit: BoxFit.contain,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -192,9 +209,9 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
               'Based on your diagnostic test, here are your estimated band scores.',
               style: GoogleFonts.inter(
                 fontSize: 13,
-                fontWeight: FontWeight.w600,
-                height: 19 / 13,
-                color: AppColors.slateBody,
+                fontWeight: FontWeight.w400,
+                height: 19.5 / 13,
+                color: AppColors.slateSoft,
               ),
             ),
           ),
@@ -214,17 +231,17 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
           BoxShadow(
             color: Color(0x0D000000),
             offset: Offset(0, 1),
-            blurRadius: 1,
+            blurRadius: 2,
           ),
           BoxShadow(
             color: Color(0x40000000),
             offset: Offset(0, 4),
-            blurRadius: 2,
+            blurRadius: 4,
           ),
         ],
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             width: 40,
@@ -234,58 +251,32 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             alignment: Alignment.center,
-            child: SvgPicture.asset(item.icon, fit: BoxFit.contain),
+            child: SvgPicture.asset(
+              item.icon,
+              width: 20,
+              height: 20,
+              fit: BoxFit.contain,
+            ),
           ),
           const SizedBox(width: 14),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        item.label,
-                        overflow: TextOverflow.ellipsis,
-                        style: GoogleFonts.inter(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          height: 20 / 16,
-                          color: AppColors.slate,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          item.score,
-                          style: GoogleFonts.inter(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            height: 24 / 20,
-                            color: item.scoreColor,
-                          ),
-                        ),
-                        Text(
-                          '(estimated)',
-                          style: GoogleFonts.inter(
-                            fontSize: 11,
-                            fontWeight: FontWeight.w500,
-                            height: 14 / 11,
-                            color: AppColors.dateHint,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                Text(
+                  item.label,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.inter(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                    height: 20 / 16,
+                    color: AppColors.slate,
+                  ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(4),
+                  borderRadius: BorderRadius.circular(9999),
                   child: SizedBox(
                     height: 8,
                     child: Stack(
@@ -297,6 +288,36 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          Flexible(
+            fit: FlexFit.loose,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  item.score,
+                  style: GoogleFonts.inter(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    height: 28 / 20,
+                    color: item.scoreColor,
+                  ),
+                ),
+                Text(
+                  '(estimated)',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.inter(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                    height: 15 / 11,
+                    color: AppColors.dateHint,
                   ),
                 ),
               ],
@@ -335,7 +356,12 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             alignment: Alignment.center,
-            child: SvgPicture.asset(icon, fit: BoxFit.contain),
+            child: SvgPicture.asset(
+              icon,
+              width: 20,
+              height: 20,
+              fit: BoxFit.contain,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -352,14 +378,15 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
                     color: textColor,
                   ),
                 ),
-                const SizedBox(height: 6),
+                const SizedBox(height: 4),
                 Text(
                   body,
+                  softWrap: true,
                   style: GoogleFonts.inter(
                     fontSize: 13,
                     fontWeight: FontWeight.w400,
-                    height: 19 / 13,
-                    color: textColor,
+                    height: 19.5 / 13,
+                    color: AppColors.slateSoft,
                   ),
                 ),
               ],
@@ -433,6 +460,8 @@ class OnboardingDiagnosticResultsScreen extends StatelessWidget {
         ),
         child: Text(
           'See My Study Plan',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
           style: GoogleFonts.inter(
             fontSize: 16,
             fontWeight: FontWeight.w700,
