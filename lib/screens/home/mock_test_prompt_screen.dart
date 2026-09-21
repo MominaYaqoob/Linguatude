@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/app_colors.dart';
+import '../../widgets/app_bottom_nav.dart';
 import '../streak/streak_gamification_screen.dart';
 
 /// DASH-004 — Quick Mock Test Prompt
@@ -17,6 +18,7 @@ class MockTestPromptScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.mockScreenBg,
       body: SafeArea(
+        bottom: false,
         child: Column(
           children: [
             _header(context),
@@ -499,87 +501,37 @@ class MockTestPromptScreen extends StatelessWidget {
   }
 
   Widget _bottomNavBar() {
-    return Container(
-      height: 64,
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      decoration: const BoxDecoration(
-        color: AppColors.white,
-        border: Border(
-          top: BorderSide(color: AppColors.mockNavBorder),
+    return const AppBottomNav(
+      activeColor: AppColors.mockButton,
+      borderColor: AppColors.mockNavBorder,
+      items: [
+        AppBottomNavItem(
+          icon: '$_mockIcons/home_nav.svg',
+          label: 'Home',
+          active: true,
         ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _navItem(
-            icon: '$_mockIcons/home_nav.svg',
-            label: 'Home',
-            active: true,
-          ),
-          _navItem(
-            icon: '$_mockIcons/learn_nav.svg',
-            label: 'Learn',
-            active: false,
-          ),
-          _navItem(
-            icon: '$_mockIcons/practice_nav.svg',
-            label: 'Practice',
-            active: false,
-          ),
-          _navItem(
-            icon: '$_mockIcons/mock_nav.svg',
-            label: 'Mock Test',
-            active: false,
-            iconSize: 24,
-          ),
-          _navItem(
-            icon: '$_mockIcons/progress_nav.svg',
-            label: 'Progress',
-            active: false,
-          ),
-          _navItem(
-            icon: '$_mockIcons/account_nav.svg',
-            label: 'Account',
-            active: false,
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _navItem({
-    required String icon,
-    required String label,
-    required bool active,
-    double iconSize = 20,
-  }) {
-    final color =
-        active ? AppColors.mockButton : AppColors.homeNavInactive;
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            icon,
-            width: iconSize,
-            height: iconSize,
-            colorFilter:
-                active ? null : ColorFilter.mode(color, BlendMode.srcIn),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.inter(
-              fontSize: 10,
-              fontWeight: FontWeight.w500,
-              height: 15 / 10,
-              color: color,
-            ),
-          ),
-        ],
-      ),
+        AppBottomNavItem(
+          icon: '$_mockIcons/learn_nav.svg',
+          label: 'Learn',
+        ),
+        AppBottomNavItem(
+          icon: '$_mockIcons/practice_nav.svg',
+          label: 'Practice',
+        ),
+        AppBottomNavItem(
+          icon: '$_mockIcons/mock_nav.svg',
+          label: 'Mock Test',
+          iconSize: 22,
+        ),
+        AppBottomNavItem(
+          icon: '$_mockIcons/progress_nav.svg',
+          label: 'Progress',
+        ),
+        AppBottomNavItem(
+          icon: '$_mockIcons/account_nav.svg',
+          label: 'Account',
+        ),
+      ],
     );
   }
 }

@@ -94,59 +94,79 @@ class _DailyGoalCompleteDialogState extends State<DailyGoalCompleteDialog> {
         Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Container(
-              width: 342,
-              padding: const EdgeInsets.fromLTRB(24, 24, 24, 24),
-              decoration: BoxDecoration(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxWidth: 342,
+                maxHeight: MediaQuery.sizeOf(context).height * 0.88,
+              ),
+              child: Material(
                 color: AppColors.white,
                 borderRadius: BorderRadius.circular(24),
-                boxShadow: const [
-                  BoxShadow(
-                    color: AppColors.goalCardShadow,
-                    offset: Offset(0, 25),
-                    blurRadius: 50,
-                    spreadRadius: -12,
+                clipBehavior: Clip.antiAlias,
+                elevation: 0,
+                shadowColor: Colors.transparent,
+                child: Container(
+                  width: 342,
+                  padding: const EdgeInsets.fromLTRB(24, 20, 24, 24),
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(24),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: AppColors.goalCardShadow,
+                        offset: Offset(0, 25),
+                        blurRadius: 50,
+                        spreadRadius: -12,
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: GestureDetector(
-                      onTap: _dismiss,
-                      behavior: HitTestBehavior.opaque,
-                      child: SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: Center(
-                          child: SvgPicture.asset(
-                            'assets/icons/home/close.svg',
-                            width: 12,
-                            height: 12,
-                            colorFilter: const ColorFilter.mode(
-                              AppColors.goalClose,
-                              BlendMode.srcIn,
+                  child: SingleChildScrollView(
+                    child: Stack(
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const SizedBox(height: 8),
+                            _header(),
+                            const SizedBox(height: 20),
+                            _statsRow(),
+                            const SizedBox(height: 16),
+                            _milestoneBanner(),
+                            const SizedBox(height: 12),
+                            _keepGoingCard(),
+                            const SizedBox(height: 20),
+                            _doneButton(),
+                            const SizedBox(height: 16),
+                            _autoReturnFooter(),
+                          ],
+                        ),
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child: GestureDetector(
+                            onTap: _dismiss,
+                            behavior: HitTestBehavior.opaque,
+                            child: SizedBox(
+                              width: 28,
+                              height: 28,
+                              child: Center(
+                                child: SvgPicture.asset(
+                                  'assets/icons/home/close.svg',
+                                  width: 12,
+                                  height: 12,
+                                  colorFilter: const ColorFilter.mode(
+                                    AppColors.goalClose,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 20),
-                  _header(),
-                  const SizedBox(height: 20),
-                  _statsRow(),
-                  const SizedBox(height: 20),
-                  _milestoneBanner(),
-                  const SizedBox(height: 20),
-                  _keepGoingCard(),
-                  const SizedBox(height: 20),
-                  _doneButton(),
-                  const SizedBox(height: 20),
-                  _autoReturnFooter(),
-                ],
+                ),
               ),
             ),
           ),
@@ -161,19 +181,14 @@ class _DailyGoalCompleteDialogState extends State<DailyGoalCompleteDialog> {
         Container(
           width: 64,
           height: 64,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: AppColors.goalFlameBg,
             shape: BoxShape.circle,
-            boxShadow: const [
+            boxShadow: [
               BoxShadow(
-                color: Color(0x40000000),
+                color: Color(0x14000000),
                 offset: Offset(0, 4),
-                blurRadius: 4,
-              ),
-              BoxShadow(
-                color: Color(0x0D000000),
-                offset: Offset(0, 2),
-                blurRadius: 4,
+                blurRadius: 8,
               ),
             ],
           ),
@@ -196,14 +211,14 @@ class _DailyGoalCompleteDialogState extends State<DailyGoalCompleteDialog> {
             color: AppColors.slate,
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 8),
         Text(
           'You did it! Keep up the amazing work.',
           textAlign: TextAlign.center,
           style: GoogleFonts.inter(
             fontSize: 13,
             fontWeight: FontWeight.w400,
-            height: 16 / 13,
+            height: 18 / 13,
             color: AppColors.slateMuted,
           ),
         ),
@@ -218,8 +233,8 @@ class _DailyGoalCompleteDialogState extends State<DailyGoalCompleteDialog> {
           child: _statChip(
             icon: Image.asset(
               'assets/icons/home/goal/flame.png',
-              width: 30,
-              height: 30,
+              width: 28,
+              height: 28,
               filterQuality: FilterQuality.high,
             ),
             value: '${widget.streakDays}-day streak',
@@ -234,8 +249,8 @@ class _DailyGoalCompleteDialogState extends State<DailyGoalCompleteDialog> {
           child: _statChip(
             icon: SvgPicture.asset(
               'assets/icons/home/goal/star.svg',
-              width: 30,
-              height: 30,
+              width: 28,
+              height: 28,
             ),
             value: '${widget.xpEarned} XP',
             label: '+${widget.xpEarned} XP today',
@@ -258,15 +273,15 @@ class _DailyGoalCompleteDialogState extends State<DailyGoalCompleteDialog> {
   }) {
     return Container(
       height: 101,
-      padding: const EdgeInsets.symmetric(vertical: 14),
+      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
       decoration: BoxDecoration(
         color: bg,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: border),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x40000000),
-            offset: Offset(0, 4),
+            color: Color(0x0D000000),
+            offset: Offset(0, 2),
             blurRadius: 4,
           ),
         ],
@@ -275,24 +290,32 @@ class _DailyGoalCompleteDialogState extends State<DailyGoalCompleteDialog> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           icon,
-          const SizedBox(height: 4),
-          Text(
-            value,
-            style: GoogleFonts.inter(
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
-              height: 20 / 15,
-              color: AppColors.slate,
+          const SizedBox(height: 6),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              value,
+              maxLines: 1,
+              style: GoogleFonts.inter(
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                height: 20 / 15,
+                color: AppColors.slate,
+              ),
             ),
           ),
           const SizedBox(height: 2),
-          Text(
-            label,
-            style: GoogleFonts.inter(
-              fontSize: 11,
-              fontWeight: FontWeight.w500,
-              height: 15 / 11,
-              color: labelColor,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              label,
+              maxLines: 1,
+              style: GoogleFonts.inter(
+                fontSize: 11,
+                fontWeight: FontWeight.w500,
+                height: 15 / 11,
+                color: labelColor,
+              ),
             ),
           ),
         ],
@@ -302,18 +325,11 @@ class _DailyGoalCompleteDialogState extends State<DailyGoalCompleteDialog> {
 
   Widget _milestoneBanner() {
     return Container(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: AppColors.goalMilestoneBg,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(color: AppColors.goalMilestoneBorder),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x40000000),
-            offset: Offset(0, 4),
-            blurRadius: 4,
-          ),
-        ],
       ),
       child: Row(
         children: [
@@ -321,14 +337,14 @@ class _DailyGoalCompleteDialogState extends State<DailyGoalCompleteDialog> {
             width: 32,
             height: 32,
             decoration: const BoxDecoration(
-              color: AppColors.goalMilestoneIconBg,
+              color: AppColors.goalFlameBg,
               shape: BoxShape.circle,
             ),
             alignment: Alignment.center,
             child: Image.asset(
               'assets/icons/home/goal/trophy.png',
-              width: 20,
-              height: 20,
+              width: 18,
+              height: 18,
               filterQuality: FilterQuality.high,
             ),
           ),
@@ -365,88 +381,76 @@ class _DailyGoalCompleteDialogState extends State<DailyGoalCompleteDialog> {
   }
 
   Widget _keepGoingCard() {
-    return Container(
-      padding: const EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: AppColors.goalKeepGoingBg,
+    return Material(
+      color: AppColors.white,
+      borderRadius: BorderRadius.circular(16),
+      child: InkWell(
+        onTap: _dismiss,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: AppColors.goalKeepGoingBorder),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x40000000),
-            offset: Offset(0, 4),
-            blurRadius: 4,
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: AppColors.goalKeepGoingIconBg,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            alignment: Alignment.center,
-            child: SvgPicture.asset(
-              'assets/icons/home/goal/book.svg',
-              width: 20,
-              height: 20,
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Keep going',
-                  style: GoogleFonts.inter(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
-                    height: 16 / 13,
-                    color: AppColors.slate,
-                  ),
-                ),
-                Text(
-                  'Practice more today',
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    height: 17 / 12,
-                    color: AppColors.slateMuted,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: 24,
-            height: 24,
-            decoration: const BoxDecoration(
-              color: AppColors.white,
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Color(0x0D000000),
-                  offset: Offset(0, 1),
-                  blurRadius: 2,
-                ),
-              ],
-            ),
-            alignment: Alignment.center,
-            child: SvgPicture.asset(
-              'assets/icons/home/goal/chevron_right.svg',
-              width: 14,
-              height: 14,
-              colorFilter: const ColorFilter.mode(
-                AppColors.goalKeepGoingChevron,
-                BlendMode.srcIn,
+        child: Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: AppColors.goalKeepGoingBorder),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x0D000000),
+                offset: Offset(0, 2),
+                blurRadius: 4,
               ),
-            ),
+            ],
           ),
-        ],
+          child: Row(
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: AppColors.goalKeepGoingIconBg,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                alignment: Alignment.center,
+                child: SvgPicture.asset(
+                  'assets/icons/home/goal/book.svg',
+                  width: 20,
+                  height: 20,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Keep going',
+                      style: GoogleFonts.inter(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w700,
+                        height: 16 / 13,
+                        color: AppColors.slate,
+                      ),
+                    ),
+                    Text(
+                      'Practice more today',
+                      style: GoogleFonts.inter(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                        height: 17 / 12,
+                        color: AppColors.slateMuted,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.chevron_right_rounded,
+                size: 22,
+                color: AppColors.goalKeepGoingChevron,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -454,45 +458,26 @@ class _DailyGoalCompleteDialogState extends State<DailyGoalCompleteDialog> {
   Widget _doneButton() {
     return SizedBox(
       width: double.infinity,
-      height: 44,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: const [
-            BoxShadow(
-              color: AppColors.goalButtonShadow,
-              offset: Offset(0, 4),
-              blurRadius: 6,
-              spreadRadius: -4,
-            ),
-            BoxShadow(
-              color: AppColors.goalButtonShadow,
-              offset: Offset(0, 10),
-              blurRadius: 15,
-              spreadRadius: -3,
-            ),
-          ],
-        ),
-        child: ElevatedButton(
-          onPressed: _dismiss,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primaryButton,
-            foregroundColor: AppColors.white,
-            elevation: 0,
-            shadowColor: Colors.transparent,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            padding: EdgeInsets.zero,
+      height: 48,
+      child: ElevatedButton(
+        onPressed: _dismiss,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.diagPrimary,
+          foregroundColor: AppColors.white,
+          elevation: 0,
+          shadowColor: Colors.transparent,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
           ),
-          child: Text(
-            'Done for Today',
-            style: GoogleFonts.inter(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              height: 16 / 14,
-              color: AppColors.white,
-            ),
+          padding: EdgeInsets.zero,
+        ),
+        child: Text(
+          'Done for Today',
+          style: GoogleFonts.inter(
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+            height: 20 / 15,
+            color: AppColors.white,
           ),
         ),
       ),
@@ -507,11 +492,15 @@ class _DailyGoalCompleteDialogState extends State<DailyGoalCompleteDialog> {
           'assets/icons/home/goal/clock.svg',
           width: 14,
           height: 14,
+          colorFilter: const ColorFilter.mode(
+            AppColors.goalFooter,
+            BlendMode.srcIn,
+          ),
         ),
         const SizedBox(width: 6),
         Flexible(
           child: Text(
-            "We'll take you back home in a few seconds",
+            "We'll take you back home in a few seconds.",
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
               fontSize: 12,

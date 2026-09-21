@@ -110,18 +110,36 @@ abstract final class AppColors {
   static const planStatIcon = Color(0xFF2B5CE6);
   static const planStatLabel = Color(0xFF94A3B8);
   static const planDivider = Color(0xFFF1F5F9);
-  static const planPillBg = Color(0xFFF8FAFC);
+  static const planTipBg = Color(0xCCFFFFFF);
+  static const planTipBorder = Color(0x99A7C8F5);
+  static const planTipIconBg = Color(0xFFFFFBEB);
+  static const planPillBg = Color(0xFFFFFFFF);
   static const planPillBorder = Color(0xFFE2E8F0);
   static const planPillSelectedBg = Color(0xFF2563EB);
-  static const planLessonBlueBg = Color(0xFFEFF6FF);
-  static const planLessonBlueBorder = Color(0xFFDBEAFE);
-  static const planLessonOrangeBg = Color(0xFFFFF7ED);
-  static const planLessonOrangeBorder = Color(0xFFFFEDD5);
-  static const planLessonOrangeIcon = Color(0xFFEA580C);
-  static const planLessonGreenBg = Color(0xFFECFDF5);
-  static const planLessonGreenBorder = Color(0xFFD1FAE5);
+  static const planPillUnselectedText = Color(0xFF334155);
+  static const planLessonBlueBg = Color(0xFFFFFFFF);
+  static const planLessonBlueBorder = Color(0xFFA8B6D4);
+  static const planLessonBlueIconBg = Color(0xFFEFF6FF);
+  static const planLessonOrangeBg = Color(0xFFFFFDF9);
+  static const planLessonOrangeBorder = Color(0x99ECCC9F);
+  static const planLessonOrangeIcon = Color(0xFFF97316);
+  static const planLessonOrangeIconBg = Color(0xFFFFF7ED);
+  static const planLessonGreenBg = Color(0x99F2FBF6);
+  static const planLessonGreenBorder = Color(0x9985CBA7);
   static const planLessonGreenIcon = Color(0xFF059669);
-  static const planExploreLink = Color(0xFF64748B);
+  static const planLessonGreenIconBg = Color(0xFFECFDF5);
+  static const planLessonTitle = Color(0xFF111827);
+  static const planLessonSubtitle = Color(0xFF9CA3AF);
+  static const planLessonMeta = Color(0xFF6B7280);
+  static const planExploreLink = Color(0xFF2563EB);
+  static const planBannerGreenBg = Color(0xB3ECFDF5);
+  static const planBannerGreenBorder = Color(0xCCD1FAE5);
+  static const planBannerGreenText = Color(0xFF064E3B);
+  static const planBannerGreenIconBg = Color(0xFFD1FAE5);
+  static const planBannerGreyBg = Color(0xFFF8FAFC);
+  static const planBannerGreyBorder = Color(0x99E2E8F0);
+  static const planBannerGreyIconBg = Color(0xB3E2E8F0);
+  static const planBannerGreyIcon = Color(0xFF475569);
 
   // Home / Today (DASH-001)
   static const homeStreakBg = Color(0xFFFFFBEB);
@@ -168,7 +186,7 @@ abstract final class AppColors {
 
   // Daily Goal Complete overlay (DASH-002)
   static const goalOverlayScrim = Color(0x990F172A);
-  static const goalCardShadow = Color(0x40000000);
+  static const goalCardShadow = Color(0x1A000000);
   static const goalFlameBg = Color(0xFFFEF3C7);
   static const goalStreakCardBg = Color(0xCCFFFBEB);
   static const goalStreakCardBorder = Color(0x99FDE68A);
@@ -251,4 +269,99 @@ abstract final class AppColors {
   static const quickCardTitle = Color(0xFF0F172A);
   static const quickCardSubtitle = Color(0xFF94A3B8);
   static const quickCardChevron = Color(0xFFCBD5E1);
+
+  // Exam Switcher (DASH-005)
+  static const examSwitcherBg = Color(0xFFF1F5F9);
+  static const examSwitcherTitle = Color(0xFF0F172A);
+  static const examSwitcherLabel = Color(0xFF64748B);
+  static const examSwitcherDesc = Color(0xFF64748B);
+  static const examSwitcherPrimary = Color(0xFF2563EB);
+  static const examSwitcherCardBorder = Color(0xFFB8C5D5);
+  static const examSwitcherRadioIdle = Color(0xFFCBD5E1);
+  static const examSwitcherAcademicIcon = Color(0xFF3B82F6);
+  static const examSwitcherAcademicPillBg = Color(0xFFEFF6FF);
+  static const examSwitcherUkviIcon = Color(0xFF9333EA);
+  static const examSwitcherUkviPillBg = Color(0xFFFAF5FF);
+  static const examSwitcherUkviPillText = Color(0xFF7E22CE);
+  static const examSwitcherLifeIcon = Color(0xFFF59E0B);
+  static const examSwitcherLifePillBg = Color(0xFFFFF7ED);
+  static const examSwitcherComingBg = Color(0xFFEFF6FF);
+  static const examSwitcherComingTitle = Color(0xFF1E293B);
+  static const examSwitcherComingDesc = Color(0xFF94A3B8);
+  static const examSwitcherComingBadgeBg = Color(0xFFE2E8F0);
+  static const examSwitcherComingBadgeText = Color(0xFF475569);
+  static const examSwitcherInfoBg = Color(0xCCEFF6FF);
+  static const examSwitcherInfoBorder = Color(0xFFDBEAFE);
+  static const examSwitcherInfoText = Color(0xFF1E3A8A);
+
+  // PTE Practice Hub (PTE-001)
+  static const pteTitle = Color(0xFF1A1A2E);
+  static const pteSubtitle = Color(0xFF6B7280);
+  static const pteScoreBadgeBg = Color(0xFFE6EEFF);
+  static const pteScoreBadgeText = Color(0xFF2563EB);
+  static const pteTabActive = Color(0xFF2563EB);
+  static const pteTabBorder = Color(0xFFF3F4F6);
+  static const pteTabInactiveTitle = Color(0xFF4B5563);
+  static const pteTabInactivePart = Color(0xFF9CA3AF);
+  static const pteCardBorder = Color(0xFFD3D5D8);
+  static const pteTaskIconBg = Color(0xFFE6EEFF);
+  static const pteTaskDesc = Color(0xFF9CA3AF);
+  static const pteProgressTrack = Color(0xFFDBDCDF);
+  static const pteProgressGreen = Color(0xFF10B981);
+  static const pteProgressBlue = Color(0xFF2563EB);
+  static const pteQuickMockBorder = Color(0xFFE2E8F0);
+  static const pteQuickMockIconBg = Color(0xFFF5F3FF);
+  static const pteQuickMockIconBorder = Color(0xFFEDE9FE);
+  static const pteQuickMockMeta = Color(0xFF64748B);
+  static const pteNavBorder = Color(0xFFF1F5F9);
+
+  // PTE Read Aloud (PTE-002)
+  static const pte002Bg = Color(0xFFFBFBFE);
+  static const pte002Header = Color(0xFF0F172A);
+  static const pte002BadgeBg = Color(0xFFF3E8FF);
+  static const pte002BadgeText = Color(0xFF7E22CE);
+  static const pte002MetaLabel = Color(0xFF94A3B8);
+  static const pte002MetaValue = Color(0xFF334155);
+  static const pte002MetaDivider = Color(0xFFD5D6D8);
+  static const pte002ActiveTask = Color(0xFF2563EB);
+  static const pte002ActiveTaskSub = Color(0xFF4338CA);
+  static const pte002TimeGreen = Color(0xFF10B981);
+  static const pte002CardBorder = Color(0xFFE3E5E8);
+  static const pte002PrepBorder = Color(0xFFDEDEDE);
+  static const pte002TextBorder = Color(0xFFD2D2D2);
+  static const pte002BodyMuted = Color(0xFF64748B);
+  static const pte002TextBody = Color(0xFF1E293B);
+  static const pte002ExampleBg = Color(0x66EEF2FF);
+  static const pte002ExampleBorder = Color(0xFFC7D2FE);
+  static const pte002PrepTrack = Color(0xFFF1F5F9);
+  static const pte002PassageBorder = Color(0xB3C7D2FE);
+  static const pte002MicCardBg = Color(0x80EEF2FF);
+  static const pte002MicCardBorder = Color(0xFFEEF2FF);
+  static const pte002MicHint = Color(0xFF475569);
+  static const pte002WarnBg = Color(0xB3EEF2FF);
+  static const pte002WarnBorder = Color(0xFFE0E7FF);
+  static const pte002NextDisabled = Color(0xFFCBD5E1);
+  static const pte002FooterBorder = Color(0xFFF1F5F9);
+  static const pte002MicOrange = Color(0xFFF59E0B);
+  static const pte002MicHalo = Color(0x99FEF3C7);
+  static const pte002MicRing = Color(0x80FDE68A);
+
+  // PTE Repeat Sentence (PTE-003)
+  static const pte003AudioBorder = Color(0xFFE8EBF0);
+  static const pte003SpeakerBg = Color(0xFFE0EAFF);
+  static const pte003Wave = Color(0xFF9EBCFF);
+  static const pte003AudioTrack = Color(0xFFC6C8CB);
+  static const pte003TimeMuted = Color(0xFF64748B);
+  static const pte003ListenHint = Color(0xFF475569);
+  static const pte003WarnBg = Color(0xFFFBEBC4);
+  static const pte003WarnBorder = Color(0xFFE0E7FF);
+  static const pte003WarnText = Color(0xFF191C1D);
+
+  // PTE Describe Image (PTE-004)
+  static const pte004PrepBorder = Color(0xFFDEDEDE);
+  static const pte004ChartBorder = Color(0xFFF3F4F6);
+  static const pte004ChartTitle = Color(0xFF111827);
+  static const pte004ImageTipBg = Color(0xFFF8FAFF);
+  static const pte004ImageTipBorder = Color(0xFFE0E7FF);
+  static const pte004MicCardBg = Color(0xFFFAFBFF);
 }

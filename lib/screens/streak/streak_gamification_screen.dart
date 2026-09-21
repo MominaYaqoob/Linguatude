@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:linguatude/theme/app_colors.dart';
+import 'package:linguatude/widgets/app_bottom_nav.dart';
 
 class StreakGamificationScreen extends StatelessWidget {
   const StreakGamificationScreen({super.key});
 
+  static const _mockIcons = 'assets/icons/home/mock';
   static const int _weeks = 12;
   static const List<String> _dayLabels = [
     'Mon',
@@ -33,6 +35,7 @@ class StreakGamificationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.white,
       body: SafeArea(
+        bottom: false,
         child: Column(
           children: [
             _header(context),
@@ -90,9 +93,44 @@ class StreakGamificationScreen extends StatelessWidget {
                 ),
               ),
             ),
+            _bottomNav(context),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _bottomNav(BuildContext context) {
+    return AppBottomNav(
+      items: [
+        AppBottomNavItem(
+          icon: '$_mockIcons/home_nav.svg',
+          label: 'Home',
+          active: true,
+          onTap: () => Navigator.of(context).maybePop(),
+        ),
+        const AppBottomNavItem(
+          icon: '$_mockIcons/learn_nav.svg',
+          label: 'Learn',
+        ),
+        const AppBottomNavItem(
+          icon: '$_mockIcons/practice_nav.svg',
+          label: 'Practice',
+        ),
+        const AppBottomNavItem(
+          icon: '$_mockIcons/mock_nav.svg',
+          label: 'Mock Test',
+          iconSize: 22,
+        ),
+        const AppBottomNavItem(
+          icon: '$_mockIcons/progress_nav.svg',
+          label: 'Progress',
+        ),
+        const AppBottomNavItem(
+          icon: '$_mockIcons/account_nav.svg',
+          label: 'Account',
+        ),
+      ],
     );
   }
 

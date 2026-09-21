@@ -5,8 +5,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme/app_colors.dart';
+import '../../widgets/app_bottom_nav.dart';
 import '../../widgets/dashboard/daily_goal_complete_dialog.dart';
 import '../streak/streak_gamification_screen.dart';
+import '../pte/pte_practice_screen.dart';
+import 'exam_switcher_screen.dart';
 import 'mock_test_prompt_screen.dart';
 
 class _Lesson {
@@ -162,27 +165,32 @@ class HomeTodayScreen extends StatelessWidget {
           children: [
             _buildHeader(context),
             Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    _buildEmailBanner(),
-                    const SizedBox(height: 20),
-                    _buildDailyGoalCard(context),
-                    const SizedBox(height: 20),
-                    _buildLessonsSection(),
-                    const SizedBox(height: 20),
-                    _buildStatsCard(),
-                    const SizedBox(height: 20),
-                    _buildQuickPracticeSection(),
-                    const SizedBox(height: 20),
-                    _buildInsightBanner(),
-                  ],
-                ),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  final hPad = constraints.maxWidth < 360 ? 16.0 : 24.0;
+                  return SingleChildScrollView(
+                    padding: EdgeInsets.fromLTRB(hPad, 8, hPad, 24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        _buildEmailBanner(),
+                        const SizedBox(height: 20),
+                        _buildDailyGoalCard(context),
+                        const SizedBox(height: 20),
+                        _buildLessonsSection(),
+                        const SizedBox(height: 20),
+                        _buildStatsCard(),
+                        const SizedBox(height: 20),
+                        _buildQuickPracticeSection(),
+                        const SizedBox(height: 20),
+                        _buildInsightBanner(),
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
-            _buildBottomNav(),
+            _buildBottomNav(context),
           ],
         ),
       ),
@@ -410,6 +418,51 @@ class HomeTodayScreen extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                     height: 20 / 14,
                     color: AppColors.slateMuted,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const ExamSwitcherScreen(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 5,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.examSwitcherAcademicPillBg,
+                      borderRadius: BorderRadius.circular(9999),
+                      border: Border.all(
+                        color: AppColors.examSwitcherPrimary.withValues(
+                          alpha: 0.25,
+                        ),
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'IELTS Academic',
+                          style: GoogleFonts.inter(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            height: 16 / 12,
+                            color: AppColors.examSwitcherPrimary,
+                          ),
+                        ),
+                        const SizedBox(width: 2),
+                        const Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          size: 16,
+                          color: AppColors.examSwitcherPrimary,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -1215,87 +1268,43 @@ class HomeTodayScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomNav() {
-    return Container(
-      height: 64,
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-        color: AppColors.white,
-        border: Border(top: BorderSide(color: AppColors.homeLessonBorder)),
-      ),
-      child: SafeArea(
-        top: false,
-        child: Row(
-          children: [
-            _buildNavItem(
-              icon: '$_mockIcons/home_nav.svg',
-              label: 'Home',
-              active: true,
-            ),
-            _buildNavItem(
-              icon: '$_mockIcons/learn_nav.svg',
-              label: 'Learn',
-              active: false,
-            ),
-            _buildNavItem(
-              icon: '$_mockIcons/practice_nav.svg',
-              label: 'Practice',
-              active: false,
-            ),
-            _buildNavItem(
-              icon: '$_mockIcons/mock_nav.svg',
-              label: 'Mock Test',
-              active: false,
-              iconSize: 24,
-            ),
-            _buildNavItem(
-              icon: '$_mockIcons/progress_nav.svg',
-              label: 'Progress',
-              active: false,
-            ),
-            _buildNavItem(
-              icon: '$_mockIcons/account_nav.svg',
-              label: 'Account',
-              active: false,
-            ),
-          ],
+  Widget _buildBottomNav(BuildContext context) {
+    return AppBottomNav(
+      items: [
+        const AppBottomNavItem(
+          icon: '$_mockIcons/home_nav.svg',
+          label: 'Home',
+          active: true,
         ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem({
-    required String icon,
-    required String label,
-    required bool active,
-    double iconSize = 20,
-  }) {
-    final color = active ? AppColors.diagPrimary : AppColors.homeNavInactive;
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            icon,
-            width: iconSize,
-            height: iconSize,
-            colorFilter:
-                active ? null : ColorFilter.mode(color, BlendMode.srcIn),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            label,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.inter(
-              fontSize: 10,
-              fontWeight: FontWeight.w500,
-              height: 15 / 10,
-              color: color,
-            ),
-          ),
-        ],
-      ),
+        const AppBottomNavItem(
+          icon: '$_mockIcons/learn_nav.svg',
+          label: 'Learn',
+        ),
+        AppBottomNavItem(
+          icon: '$_mockIcons/practice_nav.svg',
+          label: 'Practice',
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const PtePracticeScreen(),
+              ),
+            );
+          },
+        ),
+        const AppBottomNavItem(
+          icon: '$_mockIcons/mock_nav.svg',
+          label: 'Mock Test',
+          iconSize: 22,
+        ),
+        const AppBottomNavItem(
+          icon: '$_mockIcons/progress_nav.svg',
+          label: 'Progress',
+        ),
+        const AppBottomNavItem(
+          icon: '$_mockIcons/account_nav.svg',
+          label: 'Account',
+        ),
+      ],
     );
   }
 }
